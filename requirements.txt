@@ -1,0 +1,10 @@
+# Direct dependencies pinned to the versions installed and exercised locally.
+fastapi==0.143.1
+uvicorn==0.54.0
+httpx==0.28.1
+pydantic==2.14.1
+psycopg[binary]==3.3.6
+redis==8.1.0
+python-dotenv==1.2.4
+# Needed to execute the untouched historical master suite.
+SQLAlchemy==2.1.4

@@ -1,0 +1,15 @@
+.git
+.venv
+.env
+.env.*
+private
+receipts
+__pycache__
+**/__pycache__
+*.pdf
+*.pdf.txt
+img
+img_proper
+page_*.png
+reference
+backend/tests

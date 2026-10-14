@@ -1,0 +1,27 @@
+test_arrivals_require_service_authorization (test_ingestion.ApiChecks.test_arrivals_require_service_authorization) ... Executing <Task pending name='Task-2' coro=<ApiChecks.test_arrivals_require_service_authorization() running at D:\anonym\war-log\transportlah\backend\tests\test_ingestion.py:136> cb=[_run_until_complete_cb() at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:181] created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.141 seconds
+{"event": "http_request", "request_id": "2904b411-b62e-47da-9851-6ce569405d19", "method": "GET", "status": 401, "duration_ms": 31.0}
+{"event": "http_request", "request_id": "74530aff-df8e-4b7b-bbf4-5dcdfd518085", "method": "GET", "status": 200, "duration_ms": 15.0}
+ok
+test_lifespan_polls_only_configured_historical_target_and_cancels (test_ingestion.ApiChecks.test_lifespan_polls_only_configured_historical_target_and_cancels) ... ok
+test_multiple_stop_endpoint_reports_missing_capture_truthfully (test_ingestion.ApiChecks.test_multiple_stop_endpoint_reports_missing_capture_truthfully) ... {"event": "http_request", "request_id": "cadedba1-50ea-4815-865e-5bdf08fe5a99", "method": "GET", "status": 200, "duration_ms": 47.0}
+ok
+test_readiness_reports_external_dependencies_instead_of_claiming_ready (test_ingestion.ApiChecks.test_readiness_reports_external_dependencies_instead_of_claiming_ready) ... {"event": "http_request", "request_id": "400d2e69-0997-451e-9758-59ee30d30495", "method": "GET", "status": 503, "duration_ms": 47.0}
+ok
+test_request_id_is_generated_and_bad_stop_is_rejected (test_ingestion.ApiChecks.test_request_id_is_generated_and_bad_stop_is_rejected) ... {"event": "http_request", "request_id": "3e1044aa-7ebd-4b64-805f-adb2ca317b04", "method": "GET", "status": 200, "duration_ms": 31.0}
+{"event": "http_request", "request_id": "6900d034-ef88-4612-adf2-c88ab2109de2", "method": "GET", "status": 422, "duration_ms": 16.0}
+ok
+test_absent_capture_directory_is_not_ready (test_ingestion.CaptureChecks.test_absent_capture_directory_is_not_ready) ... ok
+test_concurrent_burst_is_coalesced_using_one_actual_capture_read (test_ingestion.CaptureChecks.test_concurrent_burst_is_coalesced_using_one_actual_capture_read) ... Executing <Task pending name='Task-39' coro=<CaptureChecks.test_concurrent_burst_is_coalesced_using_one_actual_capture_read() running at D:\anonym\war-log\transportlah\backend\tests\test_ingestion.py:82> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\tasks.py:712> cb=[_run_until_complete_cb() at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:181] created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.109 seconds
+ok
+test_original_hash_is_checked_and_times_are_preserved (test_ingestion.CaptureChecks.test_original_hash_is_checked_and_times_are_preserved) ... ok
+test_schedule_only_zero_locations_never_become_a_trajectory (test_ingestion.CaptureChecks.test_schedule_only_zero_locations_never_become_a_trajectory) ... ok
+test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time (test_ingestion.CaptureChecks.test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time) ... ok
+test_unrecorded_services_share_stop_budget (test_ingestion.CaptureChecks.test_unrecorded_services_share_stop_budget) ... ok
+test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback (test_ingestion.CaptureChecks.test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback) ... ok
+test_invalid_configuration_fails_explicitly (test_ingestion.ConfigurationChecks.test_invalid_configuration_fails_explicitly) ... ok
+test_secret_values_are_not_in_settings_repr (test_ingestion.ConfigurationChecks.test_secret_values_are_not_in_settings_repr) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.727s
+
+OK

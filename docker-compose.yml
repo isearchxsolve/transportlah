@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgis/postgis:16-3.5
+    environment:
+      POSTGRES_DB: transportlah
+      POSTGRES_USER: transportlah
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in private .env}
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U transportlah -d transportlah"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  redis:
+    image: redis:7.4-alpine
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD in private .env}
+    command: ["sh", "-c", "exec redis-server --requirepass \"$$REDIS_PASSWORD\" --appendonly yes"]
+    ports:
+      - "127.0.0.1:6380:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "REDISCLI_AUTH=\"$$REDIS_PASSWORD\" redis-cli ping | grep -q PONG"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  backend:
+    build: .
+    environment:
+      LTA_MODE: ${LTA_MODE:-OFFLINE_FIXTURE}
+      LTA_CAPTURE_DIR: /app/private/captures
+      LTA_DATAMALL_KEY: ${LTA_DATAMALL_KEY:-}
+      API_SERVICE_TOKEN: ${API_SERVICE_TOKEN:?Set API_SERVICE_TOKEN in private .env}
+      DATABASE_URL: postgresql://transportlah:${POSTGRES_PASSWORD}@postgres:5432/transportlah
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      ACTIVE_STOPS: ${ACTIVE_STOPS:-}
+      CACHE_TTL_SECONDS: ${CACHE_TTL_SECONDS:-30}
+      MIN_POLL_INTERVAL_SECONDS: ${MIN_POLL_INTERVAL_SECONDS:-20}
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./private/captures:/app/private/captures:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+volumes:
+  postgres_data:
+  redis_data:
