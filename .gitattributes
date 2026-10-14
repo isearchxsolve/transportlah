@@ -1,0 +1,5 @@
+* text=auto eol=lf
+# These archives and captures are evidence: preserve their exact original bytes.
+reference/seed/** -text
+backend/tests/data/** -text
+receipts/*.txt -text

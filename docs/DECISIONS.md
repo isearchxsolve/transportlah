@@ -1,0 +1,33 @@
+# TransportLah decision register
+
+Date: 2026-10-15 (Asia/Calcutta)
+
+Status meanings: ADOPTED is an engineering constraint supported by current user direction; PROPOSED is a planning choice; UNRESOLVED needs documentary reconciliation or evidence. None of these statuses imply client contractual approval.
+
+| ID | Status | Decision / issue | Rationale and consequence |
+| --- | --- | --- | --- |
+| D00 | ADOPTED | Preserve the original product requirements as the working baseline. | The later pilot omits substantial original MVP functionality; completing it cannot silently become full acceptance. |
+| D01 | ADOPTED | Permit a fresh corrected implementation while retaining original artifacts and the untouched master suite. | The user explicitly allowed starting afresh. The seed data model contains defects that must not propagate. |
+| D02 | ADOPTED | Use genuine captured data for offline replay and live/device receipts for corresponding claims. | The user's zero-manufacture law forbids manufactured responses, coordinates, and timestamps. |
+| D03 | ADOPTED | Arrival candidates, ETA, fetch time, and position observation time are distinct concepts. | LTA NextBus slots identify separate approaching buses. ETA is not the position measurement time. Do not infer a continuous single-vehicle trajectory from them. |
+| D04 | PROPOSED | Route/service/progression verification is the foundation; LTA arrival observations provide supporting context. | This follows the original seven-factor design without depending on an unavailable guaranteed per-vehicle trajectory. Field validation is still required. |
+| D05 | PROPOSED | Use Flutter for the shared iOS/Android product. | It matches the October architecture. Native Swift-only work would be a separate pilot and would not cover Android. |
+| D06 | PROPOSED | Start with a modular FastAPI backend, PostgreSQL/PostGIS, and Redis rather than numerous separately deployed services. | Keep ownership boundaries while reducing early deployment and transactional complexity. Revisit separation only with measured need. |
+| D07 | ADOPTED | Keep weighted score, evidence tier, reward amount, public ranking eligibility, and contest eligibility separate. | A score of 80-100 does not establish device attestation or universally satisfy stronger-trust contests. |
+| D08 | UNRESOLVED | Exact score/tier/contest policy and required evidence for each contest type. | Original sections 6.5 and 9 permit different trust tiers, while the architecture grants blanket contest eligibility. Record the policy explicitly before implementation. |
+| D09 | ADOPTED | Geometry distance must use a suitable metre-based projection or geography, with indexes matching query expressions. | The seed SQL uses SRID-4326 geometry with a metre-labelled distance; the schema's geography casts need a corresponding index strategy. Verify actual query plans. |
+| D10 | ADOPTED | Thresholds and speed features remain configurable assumptions until validated on genuine data. | The 12-65 km/h rule alone cannot prove bus travel or exclude a private car; stops and congestion must be handled. |
+| D11 | PROPOSED | PostgreSQL append-only points ledger is the durable reward source; Redis is recoverable acceleration. | Prevent duplicate rewards and allow auditable recovery/reconciliation. |
+| D12 | ADOPTED | Define rail verification separately and do not award verified rail credit using bus-only checks. | The product includes rail/mixed-mode journeys; train alerts/crowd data are not individual passenger evidence. |
+| D13 | UNRESOLVED | Exact retention duration, flagged-review exception, and data deletion policy. | Original requirements allow temporary retention and review exceptions; the definitive policy and execution need traceability. |
+| D14 | ADOPTED | Separate source-ready, CI-built, signed, uploaded, installed, field-tested, and client-accepted states. | The mission, milestone sheet, and full-product proposal describe different acceptance endpoints. |
+| D15 | UNRESOLVED | Authoritative signed pricing, timeline, payment gates, and IP/licence terms. | Competing historical documents must not be combined into a new implied contract. Engineering planning does not change client terms. |
+| D16 | ADOPTED | Use cloud CI for heavy builds and workload benchmarks. | User hardware/compute instructions require keeping heavy work off the laptop. |
+| D17 | ADOPTED | No performance or field-accuracy guarantee before measured proof. | Sub-5ms queries, 60fps, anti-spoofing claims, and a 15-minute release runbook are targets until evidenced. |
+| D18 | UNRESOLVED | Requested differential fuzz acceptance versus prohibition on synthetic coordinates. | An authentic corpus comparison can proceed, but it must not be misrepresented as a generated-coordinate fuzz battery. Resolve the requirement explicitly if it remains mandatory. |
+| D19 | ADOPTED | Routine work continues in Medium; park fundamentally complex items for a user-selected High pass. | Explicit user instruction on 2026-10-15. Keep exact questions, dependencies, outputs, and acceptance checks in `docs/HIGH_MODE_QUEUE.md`; never claim an automatic reasoning-setting change. |
+| D20 | ADOPTED | Keep the current ingestion cache/budget in a single worker, with bounded capacity. | Implementation is process-local. Multi-worker/instance Redis coordination needs implementation and proof before scaling. |
+| D21 | ADOPTED | Protect ingestion with a server/operator service credential while commuter auth is parked. | No rider identity or role/ownership acceptance is claimed. Never embed this credential in a mobile client. |
+| D22 | ADOPTED | Preserve the located schedule-only capture unchanged and mark it historical. | Hash consistency establishes integrity, not fresh network authenticity or vehicle/passenger presence. Monitored=0 and zero locations remain explicit. |
+| D23 | ADOPTED | Use a separate local Git repository for corrected source. | The parent D:/anonym repository ignores war-log entirely. Isolating this project avoids changing the parent ignore rules or including unrelated files. |
+| D24 | ADOPTED | Prepare cloud CI with manual dispatch until runner allowance is established. | Available GitHub account scopes could not read current billing/usage. No cloud CI execution or fees are asserted/initiated by writing the workflow. |
