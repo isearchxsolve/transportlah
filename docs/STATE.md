@@ -24,10 +24,17 @@ The user authorized a fresh implementation if discrepancies justify it, requeste
 - The real capture collector failed explicitly because no LTA key is configured. No new capture or fabricated fallback was produced.
 - Prepared authenticated loopback-bound Docker services, pinned dependency files, and a manual cloud CI workflow. Docker/Flutter are unavailable locally; container/cloud/mobile builds are not claimed.
 - Parked H02 (spatial representation/indexes/differential contract) and H03 (commuter identity/permissions/reward transactions) before their dependent work.
+- Committed and pushed the corrected source to private `https://github.com/isearchxsolve/transportlah`, branch `codex/transportlah-foundation`. Implementation commit `bcfb927858872ad647a5a99d1a040e965ed98427` matched the remote branch SHA after push.
+- Verified Git index blobs against the nine original seed hashes, the historical capture file hash, and the exact locally executed source/output hashes. `.gitattributes` preserves evidence bytes across platforms. No configured private credential value appeared in reviewed tracked files.
+- Completed 13 of 87 checklist tasks; remaining tasks are explicitly pending, including three parked High items and external evidence/execution gates.
 
 ## Exact resume point
 
 High next: H01, H02, H03 in dependency order. Routine work remaining needs current LTA credentials/genuine multi-stop captures and a real PostGIS/Redis/cloud host for its execution gates. After High contract decisions, implement the reviewed schema/auth and continue catalog/mobile/reward tasks. Do not copy the historical vehicle-trajectory logic.
+
+Read `docs/HIGH_MODE_QUEUE.md:15` first for H01, then `:51` for H02 and `:62` for H03. Current code entry points: `backend/app/main.py:28`, `backend/app/models.py:59`, `backend/app/ingestion.py:12`, and `backend/app/transport.py:38`. These references were verified on this source version.
+
+The local uvicorn server used for the smoke check is being shut down cleanly before session end. Reproduce with the README startup command; private `.env` and the unchanged historical replay copy remain ignored locally.
 
 Corrected ingestion source is implemented; no full milestone has been accepted. Local tests and actual local HTTP requests were executed. No current authenticated LTA handshake, successful PostGIS/Redis gate, cloud workflow run, iOS/Android build, device ride, store upload, or production deployment has been performed.
 

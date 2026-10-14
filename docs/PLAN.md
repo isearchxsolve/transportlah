@@ -54,7 +54,7 @@ Gate: Every mandatory feature has an acceptance criterion; product scope and unr
 - [ ] F06 Add request validation, authenticated ownership checks, request IDs, and structured logs with secret/location redaction.
 - [x] F07 Add health/readiness endpoints that distinguish process health, database health, and upstream availability. Local HTTP health=200, readiness=503 truthfully reports unavailable PostGIS/Redis; no dependency success claimed.
 - [ ] F08 Establish backend CI, migration checks, Flutter build checks, and immutable master-test execution; disclose failures honestly.
-- [ ] F09 Define receipt storage: commit SHA, test commands/results, capture provenance, deployment identity, known limits, and hashes.
+- [x] F09 Define receipt storage: commit SHA, test commands/results, capture provenance, deployment identity, known limits, and hashes. Receipts: `receipts/checks.json`, raw check outputs, local HTTP smoke, seed manifest, and the implementation commit recorded in STATE. Local execution is distinguished from absent live/cloud/device acceptance.
 
 Gate: A clean checkout can start the backend, apply migrations, authenticate, and pass appropriate foundation checks. No plaintext production secrets or unauthenticated database exposure.
 

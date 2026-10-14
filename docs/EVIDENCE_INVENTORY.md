@@ -30,7 +30,7 @@ The original master test hash remains `621efc6540f0e3815c0428be92e43ad9788e82a43
 | Docker | No executable found locally | PostGIS/Redis Compose stack and container build are prepared but not executed here. |
 | Flutter | No executable found locally | No mobile scaffold/build acceptance claimed. Cloud/client implementation pending. |
 | Apple/Google signing | Account availability not inspected | Unknown, not assumed absent. |
-| Git | Separate local repo initialized; parent ignored this folder; private isearchxsolve/transportlah remote created | Push receipt will be recorded after execution. Cloud CI is manual and remains unexecuted. |
+| Git | Private isearchxsolve/transportlah, branch codex/transportlah-foundation; implementation commit bcfb927858872ad647a5a99d1a040e965ed98427 matched the remote after push | Source push verified; cloud CI is manual and remains unexecuted. |
 | Private runner allowance | Billing/usage endpoints were unreadable with available account scopes | No cloud workflow was dispatched; no extra account scopes were requested. |
 
 ## Evidence that remains required
