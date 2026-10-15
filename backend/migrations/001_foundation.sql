@@ -108,6 +108,8 @@ BEGIN
  IF p_decision->>'policy_version' IS DISTINCT FROM 'tl-bus-policy-1' OR p_decision->>'mode' IS DISTINCT FROM r.mode
     OR NOT p_decision ?& ARRAY['score','tier','status','reward_percent','test_only','leaderboard_eligible']
  THEN RAISE EXCEPTION 'unsupported decision contract'; END IF;
+ IF r.mode='rail' AND p_decision->>'status'='verified'
+ THEN RAISE EXCEPTION 'verified rail adapter not enabled'; END IF;
  IF EXISTS(SELECT 1 FROM unnest(ARRAY['score','tier','status','reward_percent','test_only','leaderboard_eligible']) k
             WHERE p_decision->k IS NULL OR p_decision->k='null'::jsonb)
  THEN RAISE EXCEPTION 'decision values cannot be null'; END IF;

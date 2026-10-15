@@ -39,7 +39,8 @@ class IdentityChecks(unittest.IsolatedAsyncioTestCase):
 
     async def test_wrong_signature_issuer_audience_expiry_and_future_issuance_fail(self):
         for changes in ({'iss':'https://attacker.example'},{'aud':'other'},{'exp':int(time.time())-5},
-                        {'iat':int(time.time())+120},{'sub':''},{'exp':'9999999999'},{'iat':True}):
+                        {'iat':int(time.time())+120},{'sub':''},{'exp':'9999999999'},{'iat':True},
+                        {'exp':float('inf')},{'iat':float('nan')}):
             with self.subTest(changes=changes), self.assertRaises(AuthenticationFailed):
                 await self.verifier.verify(self.token(changes))
         with self.assertRaises(AuthenticationFailed): await self.verifier.verify(self.token(key=self.other))

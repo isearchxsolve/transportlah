@@ -123,7 +123,8 @@ class DatabaseChecks(unittest.TestCase):
             with self.subTest(change=change),self.assertRaises(psycopg.Error): self.settle(self.ride(),{**self.decision,**change})
         ride=self.ride()
         with psycopg.connect(DB_URL) as conn: conn.execute("UPDATE tl.rides SET mode='rail' WHERE id=%s",(ride,))
-        self.settle(ride,{**self.decision,'mode':'rail'})
+        with self.assertRaises(psycopg.Error): self.settle(ride,{**self.decision,'mode':'rail'})
+        self.settle(ride,{**self.decision,'mode':'rail','status':'probable','score':'79.00','tier':1,'reward_percent':50,'leaderboard_eligible':False})
         with psycopg.connect(DB_URL) as conn:
             self.assertEqual(conn.execute('SELECT points FROM tl.ledger WHERE ride_id=%s',(ride,)).fetchone()[0],0)
 
@@ -190,7 +191,7 @@ class DatabaseChecks(unittest.TestCase):
 
     def test_gist_plan_uses_matching_native_geography_index(self):
         with psycopg.connect(DB_URL) as conn:
-            conn.execute("INSERT INTO tl.stops SELECT 'TEST_VECTOR:'||g,'bus','TEST_VECTOR','TEST_VECTOR',ST_SetSRID(ST_MakePoint(103.6+(g%%100)*.004,1.2+(g/100)*.004),4326)::geography FROM generate_series(1,10000) g ON CONFLICT DO NOTHING")
+            conn.execute("INSERT INTO tl.stops SELECT 'TEST_VECTOR:'||g,'bus','TEST_VECTOR','TEST_VECTOR',ST_SetSRID(ST_MakePoint(103.6+mod(g,100)*.004,1.2+(g/100)*.004),4326)::geography FROM generate_series(1,10000) g ON CONFLICT DO NOTHING")
             conn.execute('ANALYZE tl.stops')
             plan=conn.execute("EXPLAIN (ANALYZE,FORMAT JSON) SELECT code FROM tl.stops WHERE ST_DWithin(location,ST_GeogFromText('POINT(103.8 1.3)'),100)").fetchone()[0]
             self.assertIn('stop_location_gist',json.dumps(plan))

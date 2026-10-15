@@ -2,6 +2,7 @@
 from dataclasses import dataclass
 import asyncio
 import json
+import math
 import time
 from urllib.parse import urlparse
 
@@ -82,8 +83,8 @@ class OIDCVerifier:
                               options={'require':['exp','iat','iss','aud','sub']},leeway=0)
             if not isinstance(claims['sub'],str) or not 1<=len(claims['sub'])<=255:
                 raise AuthenticationFailed('Invalid subject')
-            if any(type(claims[f]) not in (int,float) for f in ('exp','iat')) or claims['exp']<=claims['iat']:
+            if any(type(claims[f]) not in (int,float) or not math.isfinite(claims[f]) for f in ('exp','iat')) or claims['exp']<=claims['iat']:
                 raise AuthenticationFailed('Invalid token lifetime')
             return Principal(self.issuer,claims['sub'])
-        except (jwt.PyJWTError,ValueError,TypeError,KeyError) as exc:
+        except (jwt.PyJWTError,ValueError,TypeError,KeyError,OverflowError) as exc:
             raise AuthenticationFailed('Invalid bearer token') from exc
