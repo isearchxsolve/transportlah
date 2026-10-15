@@ -1,7 +1,7 @@
 # TransportLah execution checklist
 
 Date: 2026-10-15 (Asia/Calcutta)
-Status: Corrected ingestion foundation implemented and checked locally. Full product, live multi-stop acceptance, cloud dependency checks, and High-policy work remain pending.
+Status: The three High items are resolved with implemented policy/spatial/identity/reward foundations and real PostGIS/Redis cloud checks. Full product, live multi-stop and physical-device acceptance remain pending. Completed checklist tasks: 19/87.
 
 ## Working basis
 
@@ -11,30 +11,30 @@ Flutter, a modular FastAPI backend, PostgreSQL/PostGIS, and Redis are the propos
 
 ## Rules for every task
 
-- Never fabricate LTA responses, device coordinates, timestamps, credentials, or live proof.
+- Never represent generated data as LTA/device observations or live proof. Label mathematical/security cases TEST_VECTOR; prior AGENTS.md restrictions were withdrawn by the user.
 - Offline replay must use authentic captured responses with provenance; preserve original values and times.
 - Do not change, weaken, delete, or disable the existing master tests.
 - Add meaningful tests for new behavior without misrepresenting existing synthetic test vectors as real observations.
 - Distinguish source review, automated test results, live API proof, physical device proof, and client acceptance.
 - Keep keys and raw device location recordings private, out of Git and public logs. Obtain consent before field capture.
-- Run heavy builds, performance tests, and device-build workloads in cloud CI. Keep local work light.
+- Use suitable infrastructure for builds and load tests. Current real PostGIS/Redis integration runs in GitHub CI; prior AGENTS.md compute restrictions are no longer active.
 - Do not send client messages, incur fees, or publish releases merely because they appear in this backlog.
 - User-selected workflow: routine work in Medium; park fundamentally complex items in `docs/HIGH_MODE_QUEUE.md` for the user to switch to High. Keep independent work moving; never claim to change the setting automatically.
 
 ## Next five actions
 
-1. High H01: Resolve B02-B03 verification policy, evidence tiers, and bus/rail contract.
-2. High H02: Resolve the metre-correct spatial migration/query/index and authentic differential contract.
-3. High H03: Resolve user authentication, ownership/roles, and reward transaction design.
-4. I00-I01: Verify a real configured LTA key and capture multiple genuine stop/service responses when credentials are available.
-5. F03/F08: Execute real PostGIS/Redis/container/cloud gates when an appropriate host and runner allowance are established; then continue I05 catalog ingestion and policy-dependent implementation.
+1. B05: Define ride lifecycle and commuter/admin HTTP contracts against the resolved identity/evidence rules.
+2. I05: Implement official paginated stop/service/route import with versioned provenance; authenticate it when the client key is available.
+3. V02-V07/V09: Implement server observation evaluators and immutable ride-event lifecycle using the resolved policy/schema.
+4. F05/F06/C01: Provision a managed identity provider, integrate verified bearer ownership, and then enable commuter endpoints.
+5. I00-I01/V10-V13: Obtain client LTA access and consented Singapore recordings; run genuine upstream/corpus/device validation separately from generated CI proof.
 
 ## Stage 0: Reconcile the contract before implementation
 
 - [x] B00 Map every original MVP requirement to implementation tasks and acceptance evidence; include all ten must-haves and explicit exclusions. Receipt: `docs/REQUIREMENTS.md`; mapping completion is not product acceptance.
 - [x] B01 Record discrepancies across the original spec, architecture PDF, commercial drafts, later mission, demo, and walkthrough video. Receipt: `docs/DISCREPANCIES.md`; proposed remedies remain unimplemented.
-- [ ] B02 Separate the 0-100 weighted score from verification tier, points awarded, public ranking eligibility, and contest eligibility.
-- [ ] B03 Define separate bus and rail verification inputs; identify what cannot be established by public feeds or phone GPS alone.
+- [x] B02 Separate the 0-100 weighted score from verification tier, points awarded, public ranking eligibility, and contest eligibility. Receipt: VERIFICATION_CONTRACT and 12 policy checks; no field calibration claimed.
+- [x] B03 Define separate bus and rail verification inputs; identify what cannot be established by public feeds or phone GPS alone. Receipt: VERIFICATION_CONTRACT; rail verified settlement remains disabled.
 - [x] B04 Mark boarding radius, corridor width, time tolerances, sampling cadence, speed features, and retention rules as configurable assumptions pending validation. Receipt: `docs/ASSUMPTIONS.md`; field calibration remains pending.
 - [ ] B05 Draft the API contract for authentication, stops/services, arrivals, ride start/ping/end/status, rewards, rankings, and admin operations.
 - [x] B06 Inventory credential and field-data availability without exposing secret values; distinguish available, unverified, absent, and externally required. Receipt: `docs/EVIDENCE_INVENTORY.md`.
@@ -49,11 +49,11 @@ Gate: Every mandatory feature has an acceptance criterion; product scope and unr
 - [x] F01 Pin backend dependencies and document lightweight local setup and cloud build commands. Receipts: requirements files and README.
 - [x] F02 Define environment configuration and a secret-free example file; ignore real credentials and private captures. Private .env generated without printing credentials; reviewed project files contain no generated secret values.
 - [ ] F03 Configure PostgreSQL/PostGIS and Redis with authenticated access and restricted development exposure.
-- [ ] F04 Add versioned migrations for users, stops, route patterns, rides, observations, verification outcomes, and audit events.
-- [ ] F05 Implement authentication and distinguish commuter, campaign manager, fraud reviewer, and administrator permissions.
+- [ ] F04 Add versioned migrations for users, stops, route patterns, rides, observations, verification outcomes, and audit events. Partial: foundation schema/migration and real-engine rerun checks complete; full admin/human audit events remain pending.
+- [ ] F05 Implement authentication and distinguish commuter, campaign manager, fraud reviewer, and administrator permissions. Partial: asymmetric OIDC verifier, membership resolution, actual non-owner RLS/login checks complete; provider and HTTP/admin integration pending.
 - [ ] F06 Add request validation, authenticated ownership checks, request IDs, and structured logs with secret/location redaction.
 - [x] F07 Add health/readiness endpoints that distinguish process health, database health, and upstream availability. Local HTTP health=200, readiness=503 truthfully reports unavailable PostGIS/Redis; no dependency success claimed.
-- [ ] F08 Establish backend CI, migration checks, Flutter build checks, and immutable master-test execution; disclose failures honestly.
+- [ ] F08 Establish backend CI, migration checks, Flutter build checks, and immutable master-test execution; disclose failures honestly. Partial: real backend/PostGIS/Redis CI and unchanged master suite pass; Flutter checks remain pending.
 - [x] F09 Define receipt storage: commit SHA, test commands/results, capture provenance, deployment identity, known limits, and hashes. Receipts: `receipts/checks.json`, raw check outputs, local HTTP smoke, seed manifest, and the implementation commit recorded in STATE. Local execution is distinguished from absent live/cloud/device acceptance.
 
 Gate: A clean checkout can start the backend, apply migrations, authenticate, and pass appropriate foundation checks. No plaintext production secrets or unauthenticated database exposure.
@@ -74,15 +74,15 @@ Gate: Multiple real stops are processed correctly; rate-limit behavior is eviden
 
 ## Stage 3: M2 pilot - verification against actual route and ride evidence
 
-- [ ] V00 Design route geometry provenance; do not describe straight lines between stops as surveyed road paths.
-- [ ] V01 Choose metre-correct PostGIS geography or a suitable projected coordinate system; create indexes matching the actual query expressions.
+- [x] V00 Design route geometry provenance; do not describe straight lines between stops as surveyed road paths. Receipt: SPATIAL_CONTRACT and schema source-version/quality/stop-occurrence fields.
+- [x] V01 Choose metre-correct PostGIS geography or a suitable projected coordinate system; create indexes matching the actual query expressions. Receipt: native geography/GiST schema and real default-planner/boundary checks.
 - [ ] V02 Implement boarding-stop proximity using reported device accuracy and configurable tolerances.
 - [ ] V03 Validate selected service, direction, and stop sequence against imported official records.
 - [ ] V04 Evaluate live/recent arrival context with freshness and Monitored quality; do not claim it proves passenger presence.
 - [ ] V05 Evaluate forward route progress and corridor fit; handle stops, detours, GPS gaps, and ambiguous parallel corridors conservatively.
 - [ ] V06 Evaluate speed and motion features as supporting signals; do not classify bus versus car using the 12-65 km/h range alone.
 - [ ] V07 Validate downstream alighting and meaningful journey progression/duration.
-- [ ] V08 Compute the seven weighted factors with explainable outcomes; define unavailable evidence without inflating scores.
+- [x] V08 Compute the seven weighted factors with explainable outcomes; define unavailable evidence without inflating scores. Pure policy core and 12 checks complete; real factor evaluators are V02-V07 and remain pending.
 - [ ] V09 Implement ride lifecycle, event ordering, idempotency, replay flags, and conservative rejection/low-confidence outcomes.
 - [ ] V10 Acquire consented, genuine Singapore bus recordings with boarding/alighting notes and corresponding LTA capture context; do not invent missing traces.
 - [ ] V11 Add new acceptance cases from authentic recordings, including genuine negative/ambiguous examples where available; leave the master suite unchanged.
@@ -90,7 +90,7 @@ Gate: Multiple real stops are processed correctly; rate-limit behavior is eviden
 - [ ] V13 Inspect query plans and benchmark representative recorded workloads in cloud infrastructure; report hardware, dataset, concurrency, latency, and uncertainty.
 - [ ] V14 Define rail-specific station, transfer, tunnel/GPS-loss, and journey-duration evidence; validate separately before enabling verified rail rewards.
 
-Gate: A genuine recorded bus ride produces an explainable result through PostGIS. Index usage and performance are measured. Pedestrian, car, replay, missing-data, and rail limitations remain disclosed. A corpus differential battery is not falsely called the requested synthetic-coordinate fuzz battery.
+Gate: A genuine recorded bus ride produces an explainable result through PostGIS. Index usage and representative performance are measured. Pedestrian, car, replay, missing-data, and rail limitations remain disclosed. Generated-coordinate engine checks and genuine-corpus/device acceptance are separate receipts.
 
 ## Stage 4: M3 pilot - one complete ride on Flutter iOS and Android
 
@@ -110,8 +110,8 @@ Gate: A consenting tester can start, record, finish, and inspect a real bus ride
 
 ## Stage 5: Complete the rewards and campaign product
 
-- [ ] R00 Implement an append-only points ledger with transaction-safe, idempotent awards and auditable reversals/adjustments.
-- [ ] R01 Configure verified/probable/low-confidence reward rules separately from ranking and contest trust requirements.
+- [ ] R00 Implement an append-only points ledger with transaction-safe, idempotent awards and auditable reversals/adjustments. Partial: worker-only award/reversal, immutable snapshots, concurrent retries/cap and exact negatives pass; authorized human corrections/API still pending.
+- [x] R01 Configure verified/probable/low-confidence reward rules separately from ranking and contest trust requirements. Versioned policy and SQL guards complete; provisional economic defaults require client confirmation.
 - [ ] R02 Implement wallet balance and history derived from the ledger; reconcile duplicate events and failed transactions.
 - [ ] R03 Implement streaks, badges, and levels with configurable rules and reproducible calculations.
 - [ ] R04 Implement verified-only rankings with display names, period rollover, tie rules, and privacy preferences.
@@ -161,7 +161,7 @@ Gate: The original agreed MVP is proven against genuine data on physical devices
 - Credential availability is not established by this planning pass. The files referring to a previously registered key are historical claims, not a current authenticated handshake receipt.
 - Genuine multi-stop captures and consented Singapore device recordings are external evidence dependencies when absent.
 - Apple/Google accounts, signing, hosting, and release authorization must be available before dependent release actions.
-- Any mandatory synthetic-coordinate fuzz requirement conflicts with the current zero-manufacture instruction. Use authentic corpus comparisons and mark the unresolved acceptance difference honestly; do not generate fake coordinates to satisfy it.
+- The user withdrew prior AGENTS.md restrictions. Generated-coordinate differential/security cases are now allowed as TEST_VECTOR evidence; they never replace genuine-corpus/device acceptance.
 - The original score/tier/contest language contains ambiguity. Resolve it in an explicit policy contract; do not silently loosen trust requirements.
 - No calendar, budget, IP transfer, scope change, field accuracy, or performance guarantee is established by this backlog.
 

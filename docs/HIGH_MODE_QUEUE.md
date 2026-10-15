@@ -14,7 +14,8 @@ User instruction: Continue routine work in Medium. When an item needs High reaso
 
 ## H01 - Verification policy and bus/rail evidence contract
 
-Status: PARKED FOR HIGH. Source review is complete; design resolution is pending.
+Status: RESOLVED in the user-selected High pass. Contract and executable scoring/contest policy are complete; real observation evaluators and field calibration remain product tasks.
+Outputs: `docs/VERIFICATION_CONTRACT.md`, `backend/app/verification.py`, `backend/tests/test_verification.py`.
 PLAN dependencies: B02-B03, V02-V09, V14, R01, R09-R11.
 
 Question: How should the original seven weighted factors, four confidence classes, evidence tiers, reward eligibility, and per-contest trust rules be implemented without overstating what phone and public-feed evidence can prove?
@@ -35,7 +36,7 @@ Known constraints:
 - Bus/car speeds overlap; nearby pedestrians and replayed GPS remain evidence limitations.
 - Rail/tunnel behavior needs a separate evidence path.
 - Contest evidence requirements must be configured independently of score; strong device proof cannot be inferred from a high score.
-- No manufactured coordinates/payloads, altered master tests, or invented field outcomes.
+- Generated cases are explicitly TEST_VECTOR following withdrawal of prior AGENTS.md instructions. Preserve real captures and the master suite; never present generated cases as field outcomes.
 
 Required output:
 
@@ -50,23 +51,25 @@ Medium work that can proceed while H01 is parked: B04, B06-B08, folder/configura
 
 ## H02 - Metre-correct spatial schema, indexes, and differential contract
 
-Status: PARKED FOR HIGH. No corrected spatial migration is implemented.
+Status: RESOLVED. Native geography schema, matching GiST queries, migration checks, spherical differential and actual-engine boundary/index tests are implemented and passed in cloud CI. Genuine-corpus progression/accuracy/load acceptance remains pending.
+Outputs: `docs/SPATIAL_CONTRACT.md`, `backend/migrations/001_foundation.sql`, `backend/app/spatial.py`, `backend/tests/test_database.py`. Final receipt pointers are in STATE.
 PLAN dependencies: V00-V01, V05, V12-V13, F04 spatial portion.
 
 Question: Which geometry/geography representation, route provenance, temporal model, and query/index expression can implement the reviewed corridor contract in metres, with meaningful differential checks and no invented same-vehicle trajectory?
 
 Read `docs/DISCREPANCIES.md` X02/X06/X07/X14, the original schema/SQL generator in `reference/seed`, and the outcome of H01. The only identified capture is schedule-only with zero coordinates; it cannot validate a spatial corridor or throughput claim.
 
-Required output: a reviewed schema/query plan, matched index strategy, spherical/spheroidal comparison policy, authentic-corpus validation contract, and explicit unavailable evidence. Implement and test only what real PostGIS/corpus evidence can support. Keep field accuracy and benchmark claims pending until executed.
+Required output: a reviewed schema/query plan, matched index strategy, spherical/spheroidal comparison policy, authentic-corpus validation contract, and explicit unavailable evidence. Generated engine tests are allowed and labelled; real corpus/field accuracy and representative benchmark claims remain separate.
 
 ## H03 - Commuter identity, authorization, and reward transaction design
 
-Status: PARKED FOR HIGH before mobile/user or reward endpoints are enabled.
+Status: RESOLVED. Provider-backed JWT verifier, server membership/owner boundary, restricted database roles, immutable settlement and reversals are implemented and tested. Real-provider provisioning, commuter/admin endpoints and evidence-evaluator integration remain product tasks.
+Outputs: `docs/IDENTITY_REWARD_CONTRACT.md`, `backend/app/identity.py`, `ownership.py`, migration and crypto/real-database security tests. HTTP settlement remains closed.
 PLAN dependencies: F04-F05, C01, R00-R02, R07-R11.
 
 Question: How should provider-backed user identity, ride ownership, role/tenant boundaries, idempotent awards/reversals, and contest trust be enforced together without allowing duplicate credits or cross-user access?
 
-The current service token protects server/operator ingestion only. It is not a mobile credential and must not be embedded in Flutter. Read H01, original roles/entities, `docs/REQUIREMENTS.md`, and the new backend boundary in README.
+The current service token protects server/operator ingestion only. It is not a mobile credential and must not be embedded in Flutter. Provider identity and database settlement are separate implemented foundations; neither is automatically exposed by the ingestion API.
 
 Required output: an implementable identity/permission contract, durable reward transaction model, failure/concurrency cases, and genuine integration/security checks. No product-auth or reward-integrity acceptance is claimed now.
 

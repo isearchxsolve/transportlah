@@ -3,7 +3,7 @@ import asyncio
 import json
 import time
 import unittest
-from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives.asymmetric import rsa, ec
 import httpx
 import jwt
 from backend.app.identity import AuthenticationFailed, OIDCVerifier
@@ -63,6 +63,30 @@ class IdentityChecks(unittest.IsolatedAsyncioTestCase):
         await self.verifier.client.aclose()
         self.verifier.client=httpx.AsyncClient(transport=httpx.MockTransport(lambda r:httpx.Response(503)))
         with self.assertRaises(AuthenticationFailed): await self.verifier.verify(self.token())
+
+    async def test_es256_signature_and_wrong_curve_are_checked(self):
+        key=ec.generate_private_key(ec.SECP256R1())
+        jwk=json.loads(jwt.algorithms.ECAlgorithm.to_jwk(key.public_key()))
+        jwk.update(kid='test-ec',alg='ES256',use='sig')
+        verifier=OIDCVerifier(issuer='https://issuer.example',audience='transportlah-test',
+                              jwks_url='https://issuer.example/jwks',algorithms=('ES256',),
+                              client=httpx.AsyncClient(transport=httpx.MockTransport(lambda r:httpx.Response(200,json={'keys':[jwk]}))))
+        claims={'iss':'https://issuer.example','aud':'transportlah-test','sub':'TEST_VECTOR:ec',
+                'iat':int(time.time())-1,'exp':int(time.time())+60}
+        try:
+            token=jwt.encode(claims,key,algorithm='ES256',headers={'kid':'test-ec'})
+            self.assertEqual((await verifier.verify(token)).subject,'TEST_VECTOR:ec')
+            jwk['crv']='P-384'; verifier.expires=0; verifier.last_attempt=float('-inf')
+            with self.assertRaises(AuthenticationFailed): await verifier.verify(token)
+        finally: await verifier.close()
+
+    async def test_malformed_key_sets_fail_with_authentication_error(self):
+        for document in ([],{'keys':[123]},{'keys':[]},{'keys':[self.jwk,self.jwk]}):
+            await self.verifier.client.aclose()
+            self.verifier.client=httpx.AsyncClient(transport=httpx.MockTransport(lambda r:httpx.Response(200,json=document)))
+            self.verifier.last_attempt=float('-inf'); self.verifier.expires=0
+            with self.subTest(document=document),self.assertRaises(AuthenticationFailed):
+                await self.verifier.verify(self.token())
 
     def test_insecure_issuer_or_symmetric_algorithm_configuration_rejected(self):
         for opts in ({'issuer':'http://issuer.example'},{'jwks_url':'http://issuer.example/jwks'},{'algorithms':('HS256',)}):

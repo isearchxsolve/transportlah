@@ -52,10 +52,11 @@ class OIDCVerifier:
                         data.extend(chunk)
                         if len(data)>262144: raise ValueError('JWKS too large')
                 document=json.loads(data)
-                if not isinstance(document.get('keys'),list) or not 1<=len(document['keys'])<=64:
+                if not isinstance(document,dict) or not isinstance(document.get('keys'),list) or not 1<=len(document['keys'])<=64:
                     raise ValueError('Invalid key set')
                 keys={}
                 for entry in document['keys']:
+                    if not isinstance(entry,dict): raise ValueError('Invalid signing key')
                     if entry.get('use','sig')!='sig' or 'verify' not in entry.get('key_ops',['verify']): continue
                     alg=entry.get('alg'); key_id=entry.get('kid')
                     if alg not in self.algorithms or not isinstance(key_id,str) or not 1<=len(key_id)<=128: continue
