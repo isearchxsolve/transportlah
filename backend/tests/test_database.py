@@ -10,7 +10,7 @@ import math
 import os
 import random
 import unittest
-from uuid import uuid4
+from uuid import uuid4,uuid5,NAMESPACE_URL
 import psycopg
 from psycopg import sql
 from psycopg.conninfo import make_conninfo
@@ -20,6 +20,8 @@ from backend.app.ownership import assert_app_role, owned_transaction
 from backend.app.spatial import haversine_metres, CORRIDOR_SQL, POSITION_SQL
 from backend.app.verification import Evidence, Factor, Observation, State, decide
 from tools.migrate import migrate
+from backend.app.catalog import import_catalog, normalize_catalog
+from backend.tests.test_catalog import catalog_vector, rehash
 
 
 DB_URL=os.getenv('TEST_DATABASE_URL')
@@ -72,6 +74,42 @@ class DatabaseChecks(unittest.TestCase):
             return conn.execute('SELECT tl.settle(%s,%s)',(ride,Jsonb(decision or self.decision))).fetchone()[0]
 
     def test_migration_is_idempotent(self): migrate(DB_URL)
+
+    def test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits(self):
+        document=catalog_vector()
+        with psycopg.connect(DB_URL) as conn:
+            version=import_catalog(conn,document)
+            self.assertEqual(import_catalog(conn,document),version)
+            visits=conn.execute("SELECT sequence,stop_code,distance_km FROM tl.catalog_route_stops WHERE version=%s AND direction=1 ORDER BY sequence",(version,)).fetchall()
+            self.assertEqual([row[1] for row in visits],['00001','00002','00001'])
+            qualities=conn.execute('SELECT geometry_quality FROM tl.route_patterns WHERE source_version=%s',(version,)).fetchall()
+            self.assertEqual(qualities,[('TEST_VECTOR',),('TEST_VECTOR',)])
+            changed=catalog_vector(); changed['pages'][0]['raw']['value'][0]['Latitude']=1.32
+            new_version=import_catalog(conn,rehash(changed))
+            self.assertNotEqual(version,new_version)
+            self.assertEqual(conn.execute("SELECT ST_Y(location::geometry) FROM tl.catalog_stops WHERE version=%s AND code='00001'",(version,)).fetchone()[0],1.3)
+        with psycopg.connect(DB_URL) as conn,self.assertRaises(psycopg.Error):
+            conn.execute('DELETE FROM tl.catalog_versions WHERE id=%s',(version,))
+
+    def test_invalid_catalog_cannot_write_partial_snapshot_or_mutate_geometry(self):
+        document=catalog_vector(); document['pages'][2]['raw']['value'][0]['BusStopCode']='99999'; rehash(document)
+        with psycopg.connect(DB_URL) as conn:
+            before=conn.execute('SELECT count(*) FROM tl.catalog_versions').fetchone()[0]
+            with self.assertRaises(ValueError): import_catalog(conn,document)
+            self.assertEqual(conn.execute('SELECT count(*) FROM tl.catalog_versions').fetchone()[0],before)
+        document=catalog_vector()
+        with psycopg.connect(DB_URL) as conn: version=import_catalog(conn,document)
+        with psycopg.connect(DB_URL) as conn,self.assertRaises(psycopg.Error):
+            conn.execute("UPDATE tl.route_patterns SET path=ST_GeogFromText('LINESTRING(103.7 1.3,103.9 1.4)') WHERE source_version=%s",(version,))
+
+    def test_catalog_sql_failure_after_stop_inserts_rolls_back_new_version(self):
+        document=catalog_vector(); version=normalize_catalog(document)['version']
+        collision=uuid5(NAMESPACE_URL,'transportlah:'+version+':T1:TEST:1')
+        with psycopg.connect(DB_URL) as conn:
+            conn.execute("INSERT INTO tl.route_patterns VALUES (%s,'bus','TEST_VECTOR','1','TEST_VECTOR:injected-conflict','TEST_VECTOR',ST_GeogFromText('LINESTRING(103.8 1.3,103.81 1.31)'))",(collision,))
+            with self.assertRaises(psycopg.errors.UniqueViolation): import_catalog(conn,document)
+            self.assertEqual(conn.execute('SELECT count(*) FROM tl.catalog_versions WHERE id=%s',(version,)).fetchone()[0],0)
+            self.assertEqual(conn.execute('SELECT count(*) FROM tl.catalog_stops WHERE version=%s',(version,)).fetchone()[0],0)
 
     def test_real_app_login_has_no_bypass_and_admin_credentials_are_rejected(self):
         with psycopg.connect(self.app_url) as conn: assert_app_role(conn)
