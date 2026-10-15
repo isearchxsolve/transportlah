@@ -1,0 +1,21 @@
+test_fail_empty_trajectory (test_spatial_engine.TestSpatialVerificationEngine.test_fail_empty_trajectory)
+Empty input should fail gracefully. ... ok
+test_fail_spatial_divergence (test_spatial_engine.TestSpatialVerificationEngine.test_fail_spatial_divergence)
+User was in London while bus was in Singapore. ... ok
+test_fail_temporal_drift_12_hours_later (test_spatial_engine.TestSpatialVerificationEngine.test_fail_temporal_drift_12_hours_later)
+User coordinates match locations, but occurred 12 hours later. ... ok
+test_known_limit_90m_pedestrian (test_spatial_engine.TestSpatialVerificationEngine.test_known_limit_90m_pedestrian)
+KNOWN LIMIT: A pedestrian walking on the pavement 90m away from the bus ... ok
+test_known_limit_replayed_bus_coordinates (test_spatial_engine.TestSpatialVerificationEngine.test_known_limit_replayed_bus_coordinates)
+KNOWN LIMIT: Replaying exact vehicle coordinates directly from the public ... ok
+test_naive_timestamp_treated_as_utc (test_spatial_engine.TestSpatialVerificationEngine.test_naive_timestamp_treated_as_utc)
+Commuter submits naive ISO string '2026-10-10T23:55:04' (intended as UTC). ... ok
+test_single_ping_ride_rejected (test_spatial_engine.TestSpatialVerificationEngine.test_single_ping_ride_rejected)
+A commuter submitting only a single GPS ping is rejected. ... ok
+test_valid_ride_correlated (test_spatial_engine.TestSpatialVerificationEngine.test_valid_ride_correlated)
+User pings match bus trajectory within 5 seconds and 30 meters. ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK

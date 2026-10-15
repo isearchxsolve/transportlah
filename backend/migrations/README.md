@@ -1,5 +1,5 @@
 # Migration boundary
 
-PostGIS and Redis service configuration is provided in the root Compose file. No ride-verification spatial schema has been implemented here yet. The metre-correct query/index strategy is parked as High item H02.
+`001_foundation.sql` implements geography, provenance/occurrences, tenants/identity/memberships, rides/pings, immutable verification/ledger, owner RLS and worker-only settlement/reversal. H02/H03 are resolved; read the spatial and identity/reward contracts in docs.
 
-Do not mount the historical seed schema as the corrected production migration. Versioned product migrations will follow the reviewed evidence contract, auth model, and query/index design.
+Run `tools/migrate.py` with an explicit privileged MIGRATION_DATABASE_URL. It verifies applied-file SHA hashes and applies new migrations transactionally under an advisory lock. Never edit an already deployed migration; add the next version. The first migration expects a fresh database and unused transportlah_app/transportlah_worker group names; pre-existing roles need administrator review. No destructive automatic rollback exists. Do not mount the historical seed schema.

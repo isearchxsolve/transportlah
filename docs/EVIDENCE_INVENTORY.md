@@ -27,17 +27,17 @@ The original master test hash remains `621efc6540f0e3815c0428be92e43ad9788e82a43
 | Key/capture file inventory | Relevant filename search across D:/anonym found the seed proxy and the historical capture; no configured current key was identified. Vault filename filter for LTA/DataMall returned none. | Do not claim the user's account has no key; only current configuration/identified files are absent. No personal mailbox/password extraction was performed. |
 | Genuine multi-stop captures | One scoped historical capture identified | M1 live multi-stop acceptance remains pending. Unknown stops fail without fabricated fallback. |
 | Singapore device GPX | No GPX found in the searched deliverables/war-log roots | Device evidence remains unavailable within that scope; do not invent it. |
-| Docker | No executable found locally | PostGIS/Redis Compose stack and container build are prepared but not executed here. |
+| Docker | No executable locally; actual CI service containers executed | PostGIS16/PostGIS3.5.2 and Redis7.4 cloud integration passed. Product Compose/image build still pending. |
 | Flutter | No executable found locally | No mobile scaffold/build acceptance claimed. Cloud/client implementation pending. |
 | Apple/Google signing | Account availability not inspected | Unknown, not assumed absent. |
-| Git | Private isearchxsolve/transportlah, branch codex/transportlah-foundation; implementation commit bcfb927858872ad647a5a99d1a040e965ed98427 matched the remote after push | Source push verified; cloud CI is manual and remains unexecuted. |
-| Private runner allowance | Billing/usage endpoints were unreadable with available account scopes | No cloud workflow was dispatched; no extra account scopes were requested. |
+| Git/CI | Private isearchxsolve/transportlah, branch codex/transportlah-foundation; High source e25420c5351529fb019b8b2b4675847b27730de6 | CI run38662867180 passed57 tests with zero skips and actual readiness. Downloaded artifact/source blob hashes verified. |
+| Private runner allowance | Billing/usage endpoints unreadable with available scopes | Authorized implementation CI now executed; no extra account scopes requested. No claim about remaining account allowance. |
 
 ## Evidence that remains required
 
 - A current real LTA key handshake and multiple real stop/service captures.
 - Official stop/service/route records and geometry provenance.
 - Consented real bus and rail recordings, including ambiguous/negative field cases where obtainable.
-- Real PostGIS query plans, actual workload measurements, database recovery, and cloud CI runs.
+- Genuine-corpus workload measurements, recovery and operational execution. Generated PostGIS query plans and backend cloud CI are now available; they do not satisfy genuine workload/device accuracy acceptance.
 - Signed mobile builds, installation, background-location behavior, and field results on physical devices.
 - Written client acceptance against the reconciled full scope.

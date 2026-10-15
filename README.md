@@ -1,6 +1,6 @@
 # TransportLah
 
-Corrected ingestion foundation for the original Singapore green-commute product. This is not the complete MVP and does not verify passenger journeys yet.
+Corrected ingestion plus verification, spatial, identity and reward foundations for the original Singapore green-commute product. This is not the complete MVP and does not verify passenger journeys yet.
 
 ## Implemented and locally checked
 
@@ -12,6 +12,10 @@ Corrected ingestion foundation for the original Singapore green-commute product.
 - Optional active-stop polling through app lifespan.
 - Constant-time service-token authorization on arrival endpoints. This is server/operator authorization, not commuter identity or mobile authentication.
 - Nine byte-preserved historical seed artifacts and a SHA-256 manifest. Original master tests are unchanged.
+- Explainable seven-factor policy with conservative missing-data/tier/contest rules and a separate rail gate.
+- Versioned native-geography schema, matching indexes, restricted commuter/worker roles and immutable verification/points ledger.
+- Managed-provider asymmetric JWT verifier, server memberships and transaction-local owner/tenant RLS.
+- Worker-only atomic settlement, exact retries, gross daily cap and immutable reversals.
 
 ## Quick start on Windows
 
@@ -56,7 +60,7 @@ Push-Location reference/seed
 Pop-Location
 ```
 
-The new ingestion tests read the unaltered historical capture and exercise real local elapsed-time/cache behavior. The historical master suite retains its pre-existing test vectors and known pedestrian/replay passes. Neither suite constitutes physical passenger verification.
+Ingestion tests read the unaltered historical capture. New policy/crypto/database cases are labelled generated TEST_VECTOR data. Without TEST_DATABASE_URL, 15 real-engine tests explicitly skip; that is not database acceptance. CI requires a real disposable database and forbids skipping that gate. The historical master suite remains unchanged. None of these tests constitutes physical passenger verification.
 
 With the actual backend running, `python demo_runner.py` sends a concurrent local HTTP burst, preserves the source capture time/hash, reports schedule/unavailable-location flags and readiness failures, and writes a local receipt. It does not generate GPS pings or claim live LTA acceptance.
 
@@ -69,7 +73,9 @@ docker compose --env-file .env up --build
 python tools/check_dependencies.py
 ```
 
-The current laptop has no Docker executable; the container stack and image builds have not been executed here. `.github/workflows/backend.yml` is prepared for manual dispatch to run the immutable master suite, ingestion checks, and a real PostGIS/Redis dependency gate. A workflow file is not a completed cloud run. Initial automatic triggers are withheld because the current private-runner allowance could not be read with the available account scopes.
+The laptop has no Docker executable. GitHub CI now executes actual PostgreSQL16/PostGIS and Redis7.4 containers, migrations, real login/RLS/concurrency checks, policy/crypto/ingestion checks, unchanged master tests and readiness. Push triggers are restricted to backend/tool/dependency/workflow changes; manual dispatch is available. Output/source hashes are saved as an artifact. Product Docker-image builds and mobile/device builds remain pending. See `docs/HIGH_PASS_RECEIPT.md` for the executed run.
+
+Run `python tools/migrate.py` with an explicitly privileged MIGRATION_DATABASE_URL to apply the schema. Provision separate server-only login users inheriting either transportlah_app or transportlah_worker; commuter logins must not own tables, bypass RLS or inherit worker permissions. See `docs/IDENTITY_REWARD_CONTRACT.md`. Do not deploy commuter paths using the administrator DATABASE_URL. Provider/HTTP integration remains pending.
 
 ## Important boundaries
 
@@ -77,14 +83,14 @@ The current laptop has no Docker executable; the container stack and image build
 - All three captured candidates have `Monitored=0` and zero coordinates. Their estimated arrival times are usable as historical schedule context; vehicle position and passenger presence are not established.
 - Cache/budgets are process-local. Run one worker; multi-worker/multi-instance Redis coordination is not implemented. The 20-second setting reflects documented refresh cadence, not a proven account-wide quota agreement.
 - Freshness describes the locally captured source snapshot, not the unknown precise vehicle-position observation time.
-- Full user auth, spatial migrations, stops/routes import, scoring, rewards, Flutter builds, physical-device background GPS, field validation, and release remain pending.
-- See `docs/HIGH_MODE_QUEUE.md` before implementing parked fundamental decisions.
+- Policy core, schema, JWT/RLS boundary and settlement functions are implemented/tested. Real evaluators, provider/HTTP integration, catalogs, admin permissions, ranking/contest flows, Flutter/device validation and release remain pending.
+- H01-H03 are resolved; their contracts are linked in `docs/HIGH_MODE_QUEUE.md`.
 
 ## Resume documents
 
 Private source repository: https://github.com/isearchxsolve/transportlah. The initial implementation branch is `codex/transportlah-foundation`.
 
-`python tools/run_checks.py` writes actual test output and SHA-256 source/output receipts under `receipts/`; it does not assert live/device/cloud acceptance.
+`python tools/run_checks.py --output-dir receipts/high_local` saves local output/source hashes including skipped-test counts. Cloud receipts under `receipts/cloud_high` separately record CI SHA/run and real dependency results. Neither claims live LTA or device acceptance.
 
 - `docs/PLAN.md`: 87 tasks and gates.
 - `docs/STATE.md`: exact status and resume point.

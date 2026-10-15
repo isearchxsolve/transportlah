@@ -1,0 +1,2 @@
+{"event": "http_request", "request_id": "d88941c6-072b-4200-828d-eb896f024f2e", "method": "GET", "status": 200, "duration_ms": 16.076}
+{"ready":true,"components":{"postgres":"reachable_postgis","redis":"reachable","transit_source":"historical_replay_available","service_authorization":"configured"},"verification_enabled":false,"cache_scope":"single_process","metrics":{"source_requests":0,"cache_hits":0,"source_failures":0}}

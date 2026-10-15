@@ -1,76 +1,54 @@
 # TransportLah resume state
 
-Updated: 2026-10-15 (Asia/Calcutta)
+Updated: 2026-10-15 (Asia/Calcutta).
 
-## User direction
+## Current outcome
 
-The user authorized a fresh implementation if discrepancies justify it, requested the detailed checklist, and then chose Medium for routine execution with fundamentally complex items parked for a user-selected High pass. Follow `docs/HIGH_MODE_QUEUE.md`; keep independent routine work moving.
+The user-selected High pass resolved H01, H02 and H03. Contracts have implemented foundations and executed checks; the full MVP, genuine passenger verification and mobile clients remain pending. PLAN has 19/87 completed tasks with partial work disclosed against other IDs.
 
-## Completed review/planning work
+- H01: original seven weights, conservative missing-data/validity rules, independent score/tier/reward/ranking/contest eligibility and bus/rail contract. Twelve generated policy checks.
+- H02: versioned native geography schema and matching GiST queries; geometry quality/source/stop occurrences; independent arrival ETA/capture/position time. Actual PostGIS metre-boundary, default-planner index and 2,000-pair spherical differential checks.
+- H03: asymmetric provider JWT validation, fixed bounded JWKS, server-owned identity/membership mapping, non-owner commuter RLS, worker-only atomic settlement, daily-cap serialization and exact immutable reversals. Generated cryptographic and actual-login/concurrency database tests.
 
-- Read the mission and readable files across the two TransportLah folders; inspected the actual PDFs and all distinct slides in the walkthrough video.
-- Inventoried 85 project-folder files and 10 deliverable-folder files. Thirty JPEGs in `img` are corrupt duplicates; valid wireframes are in `img_proper`. Fifteen existing page PNGs are blank duplicates.
-- Reviewed the October architecture PDF and proposal outside the project folder.
-- Verified BusArrival field semantics against the official LTA guide and PostGIS units against official documentation.
-- Reported scope/platform drift, scoring changes, arrival-candidate/ETA misuse, score-versus-contest eligibility ambiguity, unsupported speed discrimination, SQL unit/index concerns, and competing acceptance/commercial versions.
-- Created the execution checklist in `docs/PLAN.md` and the decision register in `docs/DECISIONS.md`.
-- Completed B00 as a source-review artifact: `docs/REQUIREMENTS.md` maps all ten must-haves, supporting requirements, exclusions, and acceptance evidence.
-- Completed B01 as a source-review artifact: `docs/DISCREPANCIES.md` distinguishes scope changes, defects, ambiguous policy, and unproven claims.
-- Recorded the reasoning workflow and parked H01 (B02-B03: verification policy and bus/rail evidence contract) for High; it is not resolved.
-- Implemented the corrected ingestion foundation in `backend/app`: configuration, historical/live transports, separate arrival parsing, cache/coalescing, per-stop budgets, optional polling, protected API, structured logs, and health/readiness.
-- Completed source/configuration scaffolding and B04/B06/B07/B08 documents. Preserved nine byte-identical seed archives; all available originals still match the manifest.
-- Located a historical capture for stop 44009/service 190. Its stored payload hash matches; it is schedule-only with zero locations. The original live origin has not been independently reverified this session.
-- Executed 14 new ingestion checks and the untouched eight-test master suite successfully. A real local HTTP burst completed 25 requests with 24 cached responses; source remains historical, no locations are present, and passenger verification is disabled.
-- The real capture collector failed explicitly because no LTA key is configured. No new capture or fabricated fallback was produced.
-- Prepared authenticated loopback-bound Docker services, pinned dependency files, and a manual cloud CI workflow. Docker/Flutter are unavailable locally; container/cloud/mobile builds are not claimed.
-- Parked H02 (spatial representation/indexes/differential contract) and H03 (commuter identity/permissions/reward transactions) before their dependent work.
-- Committed and pushed the corrected source to private `https://github.com/isearchxsolve/transportlah`, branch `codex/transportlah-foundation`. Implementation commit `bcfb927858872ad647a5a99d1a040e965ed98427` matched the remote branch SHA after push.
-- Verified Git index blobs against the nine original seed hashes, the historical capture file hash, and the exact locally executed source/output hashes. `.gitattributes` preserves evidence bytes across platforms. No configured private credential value appeared in reviewed tracked files.
-- Completed 13 of 87 checklist tasks; remaining tasks are explicitly pending, including three parked High items and external evidence/execution gates.
+No commuter/admin/score-submission/settlement HTTP endpoint has been opened. Health/readiness still advertise verification_enabled=false. The ingestion service credential remains server/operator-only.
 
-## Exact resume point
+## Evidence and repository
 
-High next: H01, H02, H03 in dependency order. Routine work remaining needs current LTA credentials/genuine multi-stop captures and a real PostGIS/Redis/cloud host for its execution gates. After High contract decisions, implement the reviewed schema/auth and continue catalog/mobile/reward tasks. Do not copy the historical vehicle-trajectory logic.
+Private repository: https://github.com/isearchxsolve/transportlah, branch codex/transportlah-foundation. Final execution identity and receipt hashes are recorded in docs/HIGH_PASS_RECEIPT.md and receipts/cloud_high/checks.json; local execution is separate in receipts/high_local/checks.json.
 
-Read `docs/HIGH_MODE_QUEUE.md:15` first for H01, then `:51` for H02 and `:62` for H03. Current code entry points: `backend/app/main.py:28`, `backend/app/models.py:59`, `backend/app/ingestion.py:12`, and `backend/app/transport.py:38`. These references were verified on this source version.
+Real cloud PostgreSQL/PostGIS/Redis runs now exist. The initial run failed a SQL modulo typo in a generated index test; it was corrected and complete later runs passed. No local Docker installation was needed. The laptop still has no Docker/Flutter executables; the product Docker image, iOS/Android builds and deployment have not been executed.
 
-The local uvicorn server used for the smoke check is being shut down cleanly before session end. Reproduce with the README startup command; private `.env` and the unchanged historical replay copy remain ignored locally.
+All nine archived seed files and available originals remain byte-identical. The eight-test historical master suite remains unchanged. The stop44009/service190 historical capture (2026-10-10T21:42:59.758498+00:00) preserves its original hash/time and Monitored=0/zero positions. It is not a live handshake or passenger proof.
 
-Corrected ingestion source is implemented; no full milestone has been accepted. Local tests and actual local HTTP requests were executed. No current authenticated LTA handshake, successful PostGIS/Redis gate, cloud workflow run, iOS/Android build, device ride, store upload, or production deployment has been performed.
+Generated mathematical, cryptographic and database records are TEST_VECTOR evidence. The user withdrew prior AGENTS.md instructions before this High pass; earlier synthetic-test/hardware restrictions no longer apply. Genuine captures and generated tests remain separate. No prior AGENTS.md instructions are active.
 
-## Current external-state unknowns
+## Exact next implementation work
 
-- Current LTA key validity and authentic-capture availability.
-- Consented Singapore device recordings and field-test availability.
-- Apple/Google account and signing availability.
-- Client hosting configuration and current signed commercial scope.
+1. Draft commuter/admin ride lifecycle API contracts (B05) using the resolved identity/ownership boundary.
+2. Implement paginated official stop/service/route import (I05), preserving direction/visit/source version and honest chord geometry quality.
+3. Implement observation evaluators (V02-V07) and active-ride event order/replay/accuracy/lifecycle checks (V09). The policy consumes evaluated factors; it does not yet derive them from device traces.
+4. Provision the managed OIDC provider and separate DB logins; integrate verified bearer ownership before enabling commuter endpoints. Admin action permissions and human case/actor audit remain pending.
+5. Build Flutter active-ride flows and execute separate simulator/build/device gates.
 
-These are unknown, not confirmed absent. Independent contract/design tasks can proceed.
+No fundamental item remains parked from this pass. Add a specific new entry if route ambiguity/signal fusion or final security review exposes a new complex question.
 
-## Evidence and instructions to preserve
+## External and product gates still open
 
-- Leave the existing master suite unchanged: `D:/anonym/deliverables/transportlah/test_spatial_engine.py`.
-- Preserve seed/demo artifacts for traceability; build corrected source separately.
-- Never manufacture coordinates, timestamps, or LTA payloads to produce acceptance evidence.
-- Offline replay must preserve original authentic captured values and their provenance.
-- Build scope is the original MVP working baseline. The later M1-M3 pilot is not complete product acceptance.
+- Company LTA key/authenticated capture, official catalog import and genuine multi-stop responses.
+- Consented Singapore recordings, actual route geometry and bus/car/pedestrian/replay/rail field evaluation.
+- Client OIDC provider, hosting, Apple/Google accounts and signing configuration.
+- Client confirmation of provisional bus10/probable50%/gross-daily100 reward defaults and raw-retention48h with controlled review extension.
+- Server factor evaluators, commuter/admin endpoints, human audit, retention, rankings/contests and remaining MVP features.
+- Physical-device foreground/background GPS, Android/iOS builds, store/release submission and written acceptance.
 
-## File pointers
+The client access email remains an unsent draft in docs/EMAIL_DRAFT_CLIENT_ACCESS.md.
 
-- `docs/PLAN.md`: ordered task IDs, next five actions, stage gates, dependencies, and sources.
-- `docs/DECISIONS.md`: adopted engineering constraints versus proposed/unresolved decisions.
-- `docs/REQUIREMENTS.md`: original-spec traceability and product acceptance map.
-- `docs/DISCREPANCIES.md`: source-review finding register and remediation tasks.
-- `docs/HIGH_MODE_QUEUE.md`: the user-selected Medium/High workflow and exact parked H01 question.
-- `docs/ASSUMPTIONS.md`, `docs/EVIDENCE_INVENTORY.md`, `docs/COMMERCIAL_STATUS.md`: completed independent source/configuration inventories.
-- `backend/app/main.py`: ingestion API and health/readiness, not a verification/reward API.
-- `backend/app/models.py`: separate arrival candidates, source timestamps, quality flags, and absent position observation time.
-- `backend/app/ingestion.py`: single-process cache, per-stop budget, coalescing, and lifespan polling.
-- `backend/tests/test_ingestion.py`: 14 new meaningful checks using the unchanged historical capture.
-- `receipts/local_ingestion_smoke.json`: actual local HTTP receipt; historical replay and dependency failures are explicit.
-- `D:/anonym/war-log/transportlah/TransportLah_Final_Proposal.pdf`: original product requirements.
-- `D:/anonym/TransportLah_Implementation_Plan.pdf`: October architecture and commercial blueprint.
-- `D:/anonym/deliverables/transportlah/lta_datamall_proxy.py`: existing arrival-candidate/ETA trajectory defect.
-- `D:/anonym/deliverables/transportlah/spatial_verification.py`: current Haversine score and degree-based SQL generator.
+## Pointers
 
-Update these documents before ending an implementation session. Add verified line references when implementation source exists. Do not record stale line numbers or unearned completion claims.
+- docs/VERIFICATION_CONTRACT.md: deterministic evidence/score/tier and bus/rail rules.
+- docs/SPATIAL_CONTRACT.md: geography/index/time/provenance and differential boundaries.
+- docs/IDENTITY_REWARD_CONTRACT.md: trust, roles, RLS, settlement/reversal and acceptance boundaries.
+- backend/migrations/001_foundation.sql and tools/migrate.py: privileged versioned migration and grants.
+- backend/tests/test_database.py: actual PostGIS/login/RLS/concurrency checks; local skips are not acceptance.
+- docs/PLAN.md, DECISIONS.md, HIGH_MODE_QUEUE.md: updated task status and closed High entries.
+- docs/REQUIREMENTS.md, DISCREPANCIES.md, COMMERCIAL_STATUS.md: original scope/client discrepancies.
