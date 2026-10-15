@@ -36,6 +36,8 @@ class DatabaseChecks(unittest.TestCase):
         migrate(DB_URL)
         cls.logins=[]
         with psycopg.connect(DB_URL) as conn:
+            versions=conn.execute('SELECT version(),PostGIS_Full_Version()').fetchone()
+            print(json.dumps({'database_checks_origin':'TEST_VECTOR','postgres':versions[0],'postgis':versions[1]}))
             for role in ('transportlah_app','transportlah_worker'):
                 login='tl_test_'+uuid4().hex; password=uuid4().hex+uuid4().hex
                 conn.execute(sql.SQL('CREATE ROLE {} LOGIN PASSWORD {} NOSUPERUSER NOBYPASSRLS IN ROLE {}').format(sql.Identifier(login),sql.Literal(password),sql.Identifier(role)))

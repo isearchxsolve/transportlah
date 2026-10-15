@@ -60,6 +60,7 @@ class IdentityChecks(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.requests,['https://issuer.example/jwks'])
 
     async def test_key_fetch_failure_is_closed(self):
+        await self.verifier.client.aclose()
         self.verifier.client=httpx.AsyncClient(transport=httpx.MockTransport(lambda r:httpx.Response(503)))
         with self.assertRaises(AuthenticationFailed): await self.verifier.verify(self.token())
 
