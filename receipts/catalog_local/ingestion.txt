@@ -1,0 +1,83 @@
+test_capture_window_and_timezone_are_required (test_catalog.CatalogChecks.test_capture_window_and_timezone_are_required) ... ok
+test_direction_and_repeated_stop_occurrences_remain_distinct (test_catalog.CatalogChecks.test_direction_and_repeated_stop_occurrences_remain_distinct) ... ok
+test_duplicate_stop_and_service_records_fail_even_when_identical (test_catalog.CatalogChecks.test_duplicate_stop_and_service_records_fail_even_when_identical) ... ok
+test_missing_terminal_dataset_out_of_order_and_duplicate_pages_fail (test_catalog.CatalogChecks.test_missing_terminal_dataset_out_of_order_and_duplicate_pages_fail) ... ok
+test_nonfinite_zero_and_bad_range_coordinates_fail (test_catalog.CatalogChecks.test_nonfinite_zero_and_bad_range_coordinates_fail) ... ok
+test_tampered_raw_capture_and_missing_provenance_are_rejected (test_catalog.CatalogChecks.test_tampered_raw_capture_and_missing_provenance_are_rejected) ... ok
+test_unknown_stops_missing_services_sequence_gaps_and_backwards_distance_fail (test_catalog.CatalogChecks.test_unknown_stops_missing_services_sequence_gaps_and_backwards_distance_fail) ... ok
+test_actual_pagination_parameters_do_not_follow_untrusted_next_links (test_catalog.CatalogTransportChecks.test_actual_pagination_parameters_do_not_follow_untrusted_next_links) ... ok
+test_no_key_is_an_explicit_error (test_catalog.CatalogTransportChecks.test_no_key_is_an_explicit_error) ... ok
+test_repeated_full_page_and_page_limit_fail (test_catalog.CatalogTransportChecks.test_repeated_full_page_and_page_limit_fail) ... Executing <Task finished name='Task-11' coro=<CatalogTransportChecks.test_repeated_full_page_and_page_limit_fail() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_catalog.py:98> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.125 seconds
+ok
+test_upstream_denial_malformed_and_oversize_responses_fail_without_fallback (test_catalog.CatalogTransportChecks.test_upstream_denial_malformed_and_oversize_responses_fail_without_fallback) ... ok
+test_active_ride_and_test_evidence_in_production_rejected_atomically (test_database.DatabaseChecks.test_active_ride_and_test_evidence_in_production_rejected_atomically) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_catalog_sql_failure_after_stop_inserts_rolls_back_new_version (test_database.DatabaseChecks.test_catalog_sql_failure_after_stop_inserts_rolls_back_new_version) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits (test_database.DatabaseChecks.test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_commuter_cannot_write_award_or_invoke_worker_function (test_database.DatabaseChecks.test_commuter_cannot_write_award_or_invoke_worker_function) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_concurrent_award_retries_credit_once (test_database.DatabaseChecks.test_concurrent_award_retries_credit_once) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_concurrent_different_rides_respect_gross_daily_cap (test_database.DatabaseChecks.test_concurrent_different_rides_respect_gross_daily_cap) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_conflicting_retry_cannot_rewrite_decision (test_database.DatabaseChecks.test_conflicting_retry_cannot_rewrite_decision) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_eta_and_capture_time_are_never_position_observation_time (test_database.DatabaseChecks.test_eta_and_capture_time_are_never_position_observation_time) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_gist_plan_uses_matching_native_geography_index (test_database.DatabaseChecks.test_gist_plan_uses_matching_native_geography_index) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_invalid_catalog_cannot_write_partial_snapshot_or_mutate_geometry (test_database.DatabaseChecks.test_invalid_catalog_cannot_write_partial_snapshot_or_mutate_geometry) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_invalid_contract_and_rail_rewards_fail_closed (test_database.DatabaseChecks.test_invalid_contract_and_rail_rewards_fail_closed) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_metres_route_quality_and_spheroid_boundary (test_database.DatabaseChecks.test_metres_route_quality_and_spheroid_boundary) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_migration_is_idempotent (test_database.DatabaseChecks.test_migration_is_idempotent) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_owner_and_tenant_rls_for_actual_login_and_transaction_context_reset (test_database.DatabaseChecks.test_owner_and_tenant_rls_for_actual_login_and_transaction_context_reset) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_pings_and_decisions_cannot_be_mutated_and_replay_conflict_rejected (test_database.DatabaseChecks.test_pings_and_decisions_cannot_be_mutated_and_replay_conflict_rejected) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_real_app_login_has_no_bypass_and_admin_credentials_are_rejected (test_database.DatabaseChecks.test_real_app_login_has_no_bypass_and_admin_credentials_are_rejected) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_reversal_concurrency_is_exact_negative_and_immutable (test_database.DatabaseChecks.test_reversal_concurrency_is_exact_negative_and_immutable) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_spherical_differential_2000_generated_pairs (test_database.DatabaseChecks.test_spherical_differential_2000_generated_pairs) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_es256_signature_and_wrong_curve_are_checked (test_identity.IdentityChecks.test_es256_signature_and_wrong_curve_are_checked) ... Executing <Task finished name='Task-21' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.391 seconds
+ok
+test_insecure_issuer_or_symmetric_algorithm_configuration_rejected (test_identity.IdentityChecks.test_insecure_issuer_or_symmetric_algorithm_configuration_rejected) ... Executing <Task finished name='Task-26' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.500 seconds
+ok
+test_key_fetch_failure_is_closed (test_identity.IdentityChecks.test_key_fetch_failure_is_closed) ... Executing <Task finished name='Task-30' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.406 seconds
+ok
+test_malformed_key_sets_fail_with_authentication_error (test_identity.IdentityChecks.test_malformed_key_sets_fail_with_authentication_error) ... Executing <Task finished name='Task-35' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.734 seconds
+ok
+test_missing_expiration_and_unsigned_tokens_fail (test_identity.IdentityChecks.test_missing_expiration_and_unsigned_tokens_fail) ... Executing <Task finished name='Task-40' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.297 seconds
+ok
+test_signature_validated_but_role_and_tenant_claims_ignored (test_identity.IdentityChecks.test_signature_validated_but_role_and_tenant_claims_ignored) ... Executing <Task finished name='Task-45' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.281 seconds
+ok
+test_token_key_urls_are_ignored_and_unknown_kids_refresh_is_bounded (test_identity.IdentityChecks.test_token_key_urls_are_ignored_and_unknown_kids_refresh_is_bounded) ... Executing <Task finished name='Task-50' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.297 seconds
+ok
+test_wrong_signature_issuer_audience_expiry_and_future_issuance_fail (test_identity.IdentityChecks.test_wrong_signature_issuer_audience_expiry_and_future_issuance_fail) ... Executing <Task finished name='Task-75' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.375 seconds
+ok
+test_arrivals_require_service_authorization (test_ingestion.ApiChecks.test_arrivals_require_service_authorization) ... {"event": "http_request", "request_id": "7e5acf95-0a77-4f41-a6a5-f90f5b82ca74", "method": "GET", "status": 401, "duration_ms": 16.0}
+{"event": "http_request", "request_id": "fb2e4511-3d1d-4dcd-927d-3e2374dac8b2", "method": "GET", "status": 200, "duration_ms": 15.0}
+ok
+test_lifespan_polls_only_configured_historical_target_and_cancels (test_ingestion.ApiChecks.test_lifespan_polls_only_configured_historical_target_and_cancels) ... ok
+test_multiple_stop_endpoint_reports_missing_capture_truthfully (test_ingestion.ApiChecks.test_multiple_stop_endpoint_reports_missing_capture_truthfully) ... {"event": "http_request", "request_id": "d4020d82-6101-4bc8-af28-631bccf81420", "method": "GET", "status": 200, "duration_ms": 15.0}
+ok
+test_readiness_reports_external_dependencies_instead_of_claiming_ready (test_ingestion.ApiChecks.test_readiness_reports_external_dependencies_instead_of_claiming_ready) ... {"event": "http_request", "request_id": "300665f2-12bc-4f2a-b032-8eccdb347dd4", "method": "GET", "status": 503, "duration_ms": 32.0}
+ok
+test_request_id_is_generated_and_bad_stop_is_rejected (test_ingestion.ApiChecks.test_request_id_is_generated_and_bad_stop_is_rejected) ... {"event": "http_request", "request_id": "05d59149-d5c4-498d-ac89-0d10b5ac3e91", "method": "GET", "status": 200, "duration_ms": 16.0}
+{"event": "http_request", "request_id": "cd2fb49b-df06-43cf-b316-ff1973b86656", "method": "GET", "status": 422, "duration_ms": 0.0}
+ok
+test_absent_capture_directory_is_not_ready (test_ingestion.CaptureChecks.test_absent_capture_directory_is_not_ready) ... ok
+test_concurrent_burst_is_coalesced_using_one_actual_capture_read (test_ingestion.CaptureChecks.test_concurrent_burst_is_coalesced_using_one_actual_capture_read) ... ok
+test_original_hash_is_checked_and_times_are_preserved (test_ingestion.CaptureChecks.test_original_hash_is_checked_and_times_are_preserved) ... ok
+test_schedule_only_zero_locations_never_become_a_trajectory (test_ingestion.CaptureChecks.test_schedule_only_zero_locations_never_become_a_trajectory) ... ok
+test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time (test_ingestion.CaptureChecks.test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time) ... ok
+test_unrecorded_services_share_stop_budget (test_ingestion.CaptureChecks.test_unrecorded_services_share_stop_budget) ... ok
+test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback (test_ingestion.CaptureChecks.test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback) ... ok
+test_invalid_configuration_fails_explicitly (test_ingestion.ConfigurationChecks.test_invalid_configuration_fails_explicitly) ... ok
+test_secret_values_are_not_in_settings_repr (test_ingestion.ConfigurationChecks.test_secret_values_are_not_in_settings_repr) ... ok
+test_contests_enforce_mode_and_tier_and_disable_test_vectors_in_production (test_verification.VerificationPolicyChecks.test_contests_enforce_mode_and_tier_and_disable_test_vectors_in_production) ... ok
+test_contradicted_service_or_direction_is_rejected_even_with_high_score (test_verification.VerificationPolicyChecks.test_contradicted_service_or_direction_is_rejected_even_with_high_score) ... ok
+test_device_integrity_alone_is_not_an_onboard_proof (test_verification.VerificationPolicyChecks.test_device_integrity_alone_is_not_an_onboard_proof) ... ok
+test_full_generated_bus_evidence_is_tier_two_but_explicitly_test_only (test_verification.VerificationPolicyChecks.test_full_generated_bus_evidence_is_tier_two_but_explicitly_test_only) ... ok
+test_high_score_without_validated_corridor_cannot_be_verified (test_verification.VerificationPolicyChecks.test_high_score_without_validated_corridor_cannot_be_verified) ... ok
+test_invalid_and_incomplete_internal_evidence_is_not_accepted (test_verification.VerificationPolicyChecks.test_invalid_and_incomplete_internal_evidence_is_not_accepted) ... ok
+test_manual_claim_is_tier_zero_without_points (test_verification.VerificationPolicyChecks.test_manual_claim_is_tier_zero_without_points) ... ok
+test_missing_transit_context_never_renormalizes_other_weights (test_verification.VerificationPolicyChecks.test_missing_transit_context_never_renormalizes_other_weights) ... ok
+test_origin_is_mandatory_and_not_an_open_ended_string (test_verification.VerificationPolicyChecks.test_origin_is_mandatory_and_not_an_open_ended_string) ... ok
+test_rail_is_probable_until_a_validated_rail_adapter_exists (test_verification.VerificationPolicyChecks.test_rail_is_probable_until_a_validated_rail_adapter_exists) ... ok
+test_rounded_79_point_995_does_not_cross_class_boundary (test_verification.VerificationPolicyChecks.test_rounded_79_point_995_does_not_cross_class_boundary) ... ok
+test_single_ping_and_inactive_lifecycle_are_hard_rejections (test_verification.VerificationPolicyChecks.test_single_ping_and_inactive_lifecycle_are_hard_rejections) ... ok
+
+----------------------------------------------------------------------
+Ran 63 tests in 5.044s
+
+OK (skipped=18)

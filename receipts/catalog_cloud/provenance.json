@@ -1,0 +1,12 @@
+{
+  "run_url": "https://github.com/isearchxsolve/transportlah/actions/runs/38664361496",
+  "tested_commit": "4b24bfdf802805b1b9b04ce8441f759396b0b29a",
+  "executed_at_utc": "2026-10-15T01:12:59.595195+00:00",
+  "tests_passed": 71,
+  "tests_skipped": 0,
+  "output_hashes_verified": true,
+  "source_blob_hashes_verified": true,
+  "artifact_source_directory": "receipts/cloud_high",
+  "downloaded_directory": "receipts/catalog_cloud",
+  "live_catalog_acceptance": false
+}

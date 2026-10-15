@@ -16,6 +16,7 @@ Corrected ingestion plus verification, spatial, identity and reward foundations 
 - Versioned native-geography schema, matching indexes, restricted commuter/worker roles and immutable verification/points ledger.
 - Managed-provider asymmetric JWT verifier, server memberships and transaction-local owner/tenant RLS.
 - Worker-only atomic settlement, exact retries, gross daily cap and immutable reversals.
+- Bounded paginated stops/services/routes collector, immutable versioned catalog import, direction/loop occurrences and conservative chord provenance. Real-key catalog capture remains pending.
 
 ## Quick start on Windows
 
@@ -50,6 +51,8 @@ Set `LTA_DATAMALL_KEY` or `LTA_KEY_PATH` in private configuration, then run:
 
 The collector calls the official HTTPS endpoint, preserves the received payload and real capture time, hashes it, and writes a new file under ignored `private/captures`. Without a key, it exits with an explicit failure and writes no capture. Use a validated key and current genuine captures before claiming multi-stop live acceptance.
 
+For the catalog, run `python tools/import_catalog.py` with a real configured key. It captures BusStops/BusServices/BusRoutes under ignored private/catalog. After migration002, `--capture <file> --write-database` imports that preserved snapshot using the privileged tool-only MIGRATION_DATABASE_URL. No version is automatically promoted. See `docs/CATALOG_IMPORT.md`; designed commuter/admin routes are in `docs/API_CONTRACT.md` and remain closed.
+
 ## Tests
 
 ```powershell
@@ -60,7 +63,7 @@ Push-Location reference/seed
 Pop-Location
 ```
 
-Ingestion tests read the unaltered historical capture. New policy/crypto/database cases are labelled generated TEST_VECTOR data. Without TEST_DATABASE_URL, 15 real-engine tests explicitly skip; that is not database acceptance. CI requires a real disposable database and forbids skipping that gate. The historical master suite remains unchanged. None of these tests constitutes physical passenger verification.
+Ingestion tests read the unaltered historical capture. New policy/crypto/catalog/database cases are labelled generated TEST_VECTOR data. Without TEST_DATABASE_URL, real-engine tests explicitly skip; that is not database acceptance. CI requires a real disposable database and forbids skipping that gate. The historical master suite remains unchanged. None of these tests constitutes physical passenger verification.
 
 With the actual backend running, `python demo_runner.py` sends a concurrent local HTTP burst, preserves the source capture time/hash, reports schedule/unavailable-location flags and readiness failures, and writes a local receipt. It does not generate GPS pings or claim live LTA acceptance.
 

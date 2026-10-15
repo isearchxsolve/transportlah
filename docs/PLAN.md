@@ -1,7 +1,7 @@
 # TransportLah execution checklist
 
 Date: 2026-10-15 (Asia/Calcutta)
-Status: The three High items are resolved with implemented policy/spatial/identity/reward foundations and real PostGIS/Redis cloud checks. Full product, live multi-stop and physical-device acceptance remain pending. Completed checklist tasks: 19/87.
+Status: Three High items resolved; API contract drafted; immutable catalog importer implemented. Real PostGIS/Redis cloud checks exist. Full product, live catalog/multi-stop and physical-device acceptance remain pending. Completed checklist tasks: 20/87.
 
 ## Working basis
 
@@ -23,8 +23,8 @@ Flutter, a modular FastAPI backend, PostgreSQL/PostGIS, and Redis are the propos
 
 ## Next five actions
 
-1. B05: Define ride lifecycle and commuter/admin HTTP contracts against the resolved identity/evidence rules.
-2. I05: Implement official paginated stop/service/route import with versioned provenance; authenticate it when the client key is available.
+1. I05: Execute the implemented catalog collector/importer with a client key; review real consistency/provenance before promotion.
+2. F05/F06/V09: Implement the defined commuter ride endpoints, verified bearer ownership and immutable upload/lifecycle rules; keep verification/reward publication gated.
 3. V02-V07/V09: Implement server observation evaluators and immutable ride-event lifecycle using the resolved policy/schema.
 4. F05/F06/C01: Provision a managed identity provider, integrate verified bearer ownership, and then enable commuter endpoints.
 5. I00-I01/V10-V13: Obtain client LTA access and consented Singapore recordings; run genuine upstream/corpus/device validation separately from generated CI proof.
@@ -36,7 +36,7 @@ Flutter, a modular FastAPI backend, PostgreSQL/PostGIS, and Redis are the propos
 - [x] B02 Separate the 0-100 weighted score from verification tier, points awarded, public ranking eligibility, and contest eligibility. Receipt: VERIFICATION_CONTRACT and 12 policy checks; no field calibration claimed.
 - [x] B03 Define separate bus and rail verification inputs; identify what cannot be established by public feeds or phone GPS alone. Receipt: VERIFICATION_CONTRACT; rail verified settlement remains disabled.
 - [x] B04 Mark boarding radius, corridor width, time tolerances, sampling cadence, speed features, and retention rules as configurable assumptions pending validation. Receipt: `docs/ASSUMPTIONS.md`; field calibration remains pending.
-- [ ] B05 Draft the API contract for authentication, stops/services, arrivals, ride start/ping/end/status, rewards, rankings, and admin operations.
+- [x] B05 Draft the API contract for authentication, stops/services, arrivals, ride start/ping/end/status, rewards, rankings, and admin operations. Receipt: API_CONTRACT.md; endpoint implementation, provider and lifecycle/evaluator gates remain pending.
 - [x] B06 Inventory credential and field-data availability without exposing secret values; distinguish available, unverified, absent, and externally required. Receipt: `docs/EVIDENCE_INVENTORY.md`.
 - [x] B07 Record the current commercial baseline as unresolved if documentary evidence does not establish it; reconcile code ownership, milestones, and payment terms separately from engineering. Receipt: `docs/COMMERCIAL_STATUS.md`; no current signed contract is asserted.
 - [x] B08 Hash and inventory original seed files and the untouched master test suite; record which historical claims lack supporting artifacts. Receipts: `docs/SEED_MANIFEST.json`, `tools/verify_seed.py`, discrepancy X10.
@@ -65,7 +65,7 @@ Gate: A clean checkout can start the backend, apply migrations, authenticate, an
 - [x] I02 Parse NextBus/NextBus2/NextBus3 as separate arrival candidates; preserve ETA separately from fetch time and any documented observation time. Exercised on unchanged historical capture; zero locations remain unavailable and observation time is not invented.
 - [ ] I03 Handle Monitored, empty fields, absent services, malformed upstream responses, and estimated-location uncertainty without invented values.
 - [x] I04 Implement active-stop polling, per-stop limits, request coalescing, TTL caching, timeouts, and bounded backoff. Local replay/burst/elapsed-time/lifespan checks pass; live HTTP error/backoff integration and distributed coordination remain unverified/unimplemented respectively.
-- [ ] I05 Import paginated BusStops, BusServices, and BusRoutes; preserve direction, stop sequence, visit information, and source version.
+- [ ] I05 Import paginated BusStops, BusServices, and BusRoutes; preserve direction, stop sequence, visit information, and source version. Partial: fixed-endpoint bounded collector, normalized immutable catalog snapshots, migration002 and generated/real-DB checks implemented. Company-key collection/import and consistency review remain pending; no live catalog acceptance claimed.
 - [ ] I06 Implement LIVE_NETWORK and authentic-capture replay transports using the same parser and validation path; fail clearly when capture data is absent.
 - [ ] I07 Add ingestion checks for cache expiry, duplicate requests, multiple stops, service filtering, and upstream failure handling; use genuine captures and actual request-count receipts.
 - [ ] I08 Document current upstream contracts and limitations; demonstrate multi-stop processing and rate-limit behavior with live proof clearly distinguished from replay results.

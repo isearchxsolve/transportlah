@@ -1,0 +1,86 @@
+{
+  "executed_at_utc": "2026-10-15T01:13:25.264112+00:00",
+  "checks": [
+    {
+      "name": "seed_integrity",
+      "exit_code": 0,
+      "tests_run": null,
+      "tests_skipped": 0,
+      "output_file": "receipts/catalog_local/seed_integrity.txt",
+      "output_sha256": "397fcc455eb9cc367c505933adef89c5e1445e613e9dfe019fb212f7630bb08c"
+    },
+    {
+      "name": "ingestion",
+      "exit_code": 0,
+      "tests_run": 63,
+      "tests_skipped": 18,
+      "output_file": "receipts/catalog_local/ingestion.txt",
+      "output_sha256": "4c7baff5e87669a00b0d03bc4d7207992b1842ed0185162eedc505c4dc3b0214"
+    },
+    {
+      "name": "untouched_master",
+      "exit_code": 0,
+      "tests_run": 8,
+      "tests_skipped": 0,
+      "output_file": "receipts/catalog_local/untouched_master.txt",
+      "output_sha256": "6d7b3d440d15ed4bb22c678286797f9e558ad0d83b73ad444f20c24f7e201b07"
+    },
+    {
+      "name": "dependency_consistency",
+      "exit_code": 0,
+      "tests_run": null,
+      "tests_skipped": 0,
+      "output_file": "receipts/catalog_local/dependency_consistency.txt",
+      "output_sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+    },
+    {
+      "name": "syntax",
+      "exit_code": 0,
+      "tests_run": null,
+      "tests_skipped": 0,
+      "output_file": "receipts/catalog_local/syntax.txt",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_sha256": {
+    ".github/workflows/backend.yml": "dd531d1d27e85bab81bbae8f2e8b9704e48b0c3024f5294c40e6ed4d5345f569",
+    "backend/__init__.py": "2fec59e082006f39bc30ed1c9fe2ef82c90f5b157e344806380cf63ccd2bde16",
+    "backend/app/__init__.py": "5f19f026ecb87a101c3fa5945d1bd5899a8fbe2a3e3972f093d71c16208f3247",
+    "backend/app/catalog.py": "3b8ad9581887283f2442d8077257cc7852e194b0ea04edee856b92aa78a7e168",
+    "backend/app/config.py": "b95027bde983fe00a19748d6cd5c1254f9b335a57bafb691866734a34b25976a",
+    "backend/app/identity.py": "49cf73633d151249a70e9e5dcf5ffebedfed4beb6f9aeec95a4955b3bb037b29",
+    "backend/app/ingestion.py": "8ae48a006a95d3d481c6bb6519a48c3715571e93415d0c566107ab1191d75e60",
+    "backend/app/main.py": "4ab9f09171159dd235ce22ad5440c4b50bc678cd3f6a9a70d8f95b9eb2b4cea2",
+    "backend/app/models.py": "0378ed50566f96958b5127b42eabb169191e99edf5683fadf9fff73c0d9f6b24",
+    "backend/app/ownership.py": "3740027264e002b89efedbe805dfbc37554d9230c8ce02ca1f8fff937dbb50ae",
+    "backend/app/spatial.py": "3f73539b7e35438d7e9959be9ef75625b5d89fc7148741cfd6a61fd0179134e8",
+    "backend/app/transport.py": "4db683e0d7cd8914310c5666538958c85a7b645f70cdf207e96c01dac2de46fc",
+    "backend/app/verification.py": "ad819307d7b5d27bb043e071e5aab335ad99cae1f494be597a72fd4d696f4ef4",
+    "backend/migrations/001_foundation.sql": "ba08686f16e0c3959ab606a6b9fb6d96ddf6fee58bda2b668f9d01939d7e02d0",
+    "backend/migrations/002_catalog.sql": "c76e838bf3d57d0018985598d43ce67362f48005a9f4edcf84a7f3905d31c3b6",
+    "backend/tests/__init__.py": "5eb987cfb31b3dc5cf54b7818f5a26fe9c793bbce71b67d27bb5ff0fde1e0acb",
+    "backend/tests/test_catalog.py": "cd49d02e00ad05e44bf8c5cf30a5b642b39f08576edc89186a277796ee3b3774",
+    "backend/tests/test_database.py": "f33064e198eef9731556529239349e26f6169d47533a6f69e7648454812d7c10",
+    "backend/tests/test_identity.py": "541c7b0328bbfa8486db6224a4063e5a122084eaf04971af93543ce490747992",
+    "backend/tests/test_ingestion.py": "ca8b151a7d1d506218b6baf19eec627f575000d5eee14861f6eb6f4e796b8217",
+    "backend/tests/test_verification.py": "2b1794d40f93ef49c1359f2d46c3014dbf97e040756d3ea2a251bfbfe9b58c69",
+    "demo_runner.py": "fc7f6cd123a19b75ecce6fbd41854af0c70b49f59b9992d0f97c3f683ba2d20d",
+    "docker-compose.yml": "7655bf3fb66798eaca441ab4a80665516b6219371725298610d0dc1dcf37df61",
+    "Dockerfile": "925ba612b80c0ee7495553f808a46b3ac7ece08c2172091cb6d07e0876a625dd",
+    "requirements.lock": "6d6e64f95adbe57765caddec59b44a5e196da423e055ee3b328695bc3eaad8e0",
+    "requirements.txt": "d42a04325dfce052df886f7404578b69a108c00154aca0cb2aacfbb9f69b4987",
+    "tools/capture_lta.py": "8f69f2e6a3fd0d84f2fbc61c49d90944f57a5a47628da0442e88a92fff7ed625",
+    "tools/check_dependencies.py": "7c6175d5fd4f82427f82dc15565cd625d90f6936a05f6a7a6fc2cac788b1fb8d",
+    "tools/import_catalog.py": "1ee3b071de5c7b12055284a04df7d894075118c41881a3a72c89d12591b5c9bc",
+    "tools/init_local.py": "3a053f74d0e4f52c73a5e8daa3e07dadb8fd39e55345c9a1342117d3b3fe50ca",
+    "tools/migrate.py": "25b6da0e7b11a379c486cab32db38a9ea35927e8d4a47ddddfa7d2ec83b5d2a6",
+    "tools/run_checks.py": "791df1b36e5435ae9aeb92980ba9231e3e38afbad879a401d48fb0a392b1e2c5",
+    "tools/verify_seed.py": "a29b024ee9aa156e27137037e8b5b96714092ff9b54832732584beb2898be6a1"
+  },
+  "live_lta_acceptance": false,
+  "physical_device_acceptance": false,
+  "cloud_ci_executed": false,
+  "commit_sha": null,
+  "run_id": null,
+  "postgis_redis_gate_passed": false
+}

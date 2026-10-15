@@ -4,7 +4,7 @@ Updated: 2026-10-15 (Asia/Calcutta).
 
 ## Current outcome
 
-The user-selected High pass resolved H01, H02 and H03. Contracts have implemented foundations and executed checks; the full MVP, genuine passenger verification and mobile clients remain pending. PLAN has 19/87 completed tasks with partial work disclosed against other IDs.
+The user-selected High pass resolved H01, H02 and H03. Routine Medium work resumed with the API contract and immutable catalog importer. PLAN has 20/87 completed tasks with partial work disclosed against other IDs. Full MVP, genuine passenger verification and mobile clients remain pending.
 
 - H01: original seven weights, conservative missing-data/validity rules, independent score/tier/reward/ranking/contest eligibility and bus/rail contract. Twelve generated policy checks.
 - H02: versioned native geography schema and matching GiST queries; geometry quality/source/stop occurrences; independent arrival ETA/capture/position time. Actual PostGIS metre-boundary, default-planner index and 2,000-pair spherical differential checks.
@@ -22,10 +22,12 @@ All nine archived seed files and available originals remain byte-identical. The 
 
 Generated mathematical, cryptographic and database records are TEST_VECTOR evidence. The user withdrew prior AGENTS.md instructions before this High pass; earlier synthetic-test/hardware restrictions no longer apply. Genuine captures and generated tests remain separate. No prior AGENTS.md instructions are active.
 
+Latest Medium catalog batch: tested source4b24bfdf802805b1b9b04ce8441f759396b0b29a, CI38664361496 passed71 tests with zero skips and actual PostGIS/Redis readiness. Source/output artifact hashes verified; preserved in receipts/catalog_cloud. Local receipts/catalog_local record45 passing backend cases plus18 explicit database skips and the unchanged8 master checks. The real catalog collector exited1 for absent LTA key before creating a capture. See docs/MEDIUM_CATALOG_RECEIPT.md.
+
 ## Exact next implementation work
 
-1. Draft commuter/admin ride lifecycle API contracts (B05) using the resolved identity/ownership boundary.
-2. Implement paginated official stop/service/route import (I05), preserving direction/visit/source version and honest chord geometry quality.
+1. Implement the drafted commuter/admin ride lifecycle API contracts (B05 complete), using verified bearer/owner isolation and transactional idempotency.
+2. Execute the implemented paginated catalog collector/importer (I05 partial) with the company LTA key; review genuine consistency before promotion. Catalog snapshots and chord geometry are immutable and versioned.
 3. Implement observation evaluators (V02-V07) and active-ride event order/replay/accuracy/lifecycle checks (V09). The policy consumes evaluated factors; it does not yet derive them from device traces.
 4. Provision the managed OIDC provider and separate DB logins; integrate verified bearer ownership before enabling commuter endpoints. Admin action permissions and human case/actor audit remain pending.
 5. Build Flutter active-ride flows and execute separate simulator/build/device gates.
@@ -48,6 +50,8 @@ The client access email remains an unsent draft in docs/EMAIL_DRAFT_CLIENT_ACCES
 - docs/VERIFICATION_CONTRACT.md: deterministic evidence/score/tier and bus/rail rules.
 - docs/SPATIAL_CONTRACT.md: geography/index/time/provenance and differential boundaries.
 - docs/IDENTITY_REWARD_CONTRACT.md: trust, roles, RLS, settlement/reversal and acceptance boundaries.
+- docs/API_CONTRACT.md: commuter/operator/admin endpoints, lifecycle, retry, clock/upload and action-permission rules; only operator endpoints currently exposed.
+- docs/CATALOG_IMPORT.md and backend/app/catalog.py: bounded paginated captures, integrity/normalization, immutable snapshots and transactional import; no real-key capture or active-catalog promotion yet.
 - backend/migrations/001_foundation.sql and tools/migrate.py: privileged versioned migration and grants.
 - backend/tests/test_database.py: actual PostGIS/login/RLS/concurrency checks; local skips are not acceptance.
 - docs/PLAN.md, DECISIONS.md, HIGH_MODE_QUEUE.md: updated task status and closed High entries.
