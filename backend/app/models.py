@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import math
+import re
 from typing import Literal
 
 from pydantic import BaseModel, ConfigDict
@@ -60,13 +61,13 @@ def parse_arrivals(capture: CapturedResponse, requested_stop=None, requested_ser
     raw = capture.raw
     stop = raw.get("BusStopCode")
     services = raw.get("Services")
-    if not isinstance(stop, str) or not stop.isdigit() or len(stop) != 5 or not isinstance(services, list):
+    if not isinstance(stop, str) or not re.fullmatch('[0-9]{5}',stop) or not isinstance(services, list):
         raise SourceUnavailable("LTA arrival response has an invalid stop/services structure", status_code=502)
     if requested_stop is not None and stop != requested_stop:
         raise SourceUnavailable("LTA response stop differs from the requested stop", status_code=502)
     parsed_services = []
     for service in services:
-        if not isinstance(service, dict) or not isinstance(service.get("ServiceNo"), str):
+        if not isinstance(service, dict) or not isinstance(service.get("ServiceNo"), str) or not re.fullmatch('[A-Za-z0-9]{1,8}',service['ServiceNo']):
             raise SourceUnavailable("LTA service entry is malformed", status_code=502)
         if requested_service and service["ServiceNo"] != requested_service:
             continue
@@ -91,13 +92,14 @@ def parse_arrivals(capture: CapturedResponse, requested_stop=None, requested_ser
             else:
                 flags.append("arrival_unavailable")
             value = candidate.get("Monitored")
-            monitored = True if value in (1, "1") else False if value in (0, "0") else None
+            monitored = (True if value in (1, "1") else False if value in (0, "0") else None) if type(value) in (int,str) else None
             if monitored is False:
                 flags.append("schedule_based_estimate")
             elif monitored is None:
                 flags.append("monitoring_status_unavailable")
             location = None
             try:
+                if type(candidate.get('Latitude')) is bool or type(candidate.get('Longitude')) is bool: raise ValueError('Boolean is not a coordinate')
                 latitude = float(candidate["Latitude"])
                 longitude = float(candidate["Longitude"])
                 if math.isfinite(latitude) and math.isfinite(longitude) and -90 <= latitude <= 90 and -180 <= longitude <= 180 and (latitude, longitude) != (0.0, 0.0):

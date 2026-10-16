@@ -9,6 +9,8 @@ import json
 import math
 import os
 import random
+import asyncio
+import time
 import unittest
 from uuid import uuid4,uuid5,NAMESPACE_URL
 import psycopg
@@ -22,6 +24,14 @@ from backend.app.verification import Evidence, Factor, Observation, State, decid
 from tools.migrate import migrate
 from backend.app.catalog import import_catalog, normalize_catalog
 from backend.tests.test_catalog import catalog_vector, rehash
+from backend.app.evaluators import boarding_proximity,service_sequence
+from backend.app.verification import State
+from backend.app.config import Settings
+from backend.app.main import create_app
+from backend.app.identity import OIDCVerifier
+from cryptography.hazmat.primitives.asymmetric import rsa
+import httpx
+import jwt
 
 
 DB_URL=os.getenv('TEST_DATABASE_URL')
@@ -37,6 +47,9 @@ class DatabaseChecks(unittest.TestCase):
             raise RuntimeError('Explicit disposable database acknowledgement required')
         migrate(DB_URL)
         cls.logins=[]
+        cls.signing_key=rsa.generate_private_key(public_exponent=65537,key_size=2048)
+        cls.jwk=json.loads(jwt.algorithms.RSAAlgorithm.to_jwk(cls.signing_key.public_key()))
+        cls.jwk.update(kid='TEST_VECTOR:signing-key',alg='RS256',use='sig')
         with psycopg.connect(DB_URL) as conn:
             versions=conn.execute('SELECT version(),PostGIS_Full_Version()').fetchone()
             print(json.dumps({'database_checks_origin':'TEST_VECTOR','postgres':versions[0],'postgis':versions[1]}))
@@ -74,6 +87,125 @@ class DatabaseChecks(unittest.TestCase):
             return conn.execute('SELECT tl.settle(%s,%s)',(ride,Jsonb(decision or self.decision))).fetchone()[0]
 
     def test_migration_is_idempotent(self): migrate(DB_URL)
+
+    def bearer(self,**changes):
+        claims={'iss':'https://test.example','aud':'transportlah-test','sub':str(self.user),
+                'iat':int(time.time())-1,'exp':int(time.time())+300,**changes}
+        return {'Authorization':'Bearer '+jwt.encode(claims,self.signing_key,algorithm='RS256',headers={'kid':'TEST_VECTOR:signing-key'})}
+
+    def http_checks(self,operation):
+        async def run():
+            verifier=OIDCVerifier(issuer='https://test.example',audience='transportlah-test',jwks_url='https://test.example/jwks',
+                                  client=httpx.AsyncClient(transport=httpx.MockTransport(lambda r:httpx.Response(200,json={'keys':[self.jwk]}))))
+            settings=Settings(capture_dir=__import__('pathlib').Path(__file__).parent/'data',commuter_api_enabled=True,
+                              app_database_url=self.app_url,oidc_issuer='https://test.example',oidc_audience='transportlah-test',
+                              oidc_jwks_url='https://test.example/jwks')
+            app=create_app(settings,identity_verifier=verifier)
+            async with app.router.lifespan_context(app):
+                async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app),base_url='http://test') as client:
+                    await operation(client)
+        asyncio.run(run())
+
+    def test_authenticated_http_owner_tenant_and_missing_identity_boundaries(self):
+        own=self.ride(); other=self.ride(user=self.other_user); third=self.ride(tenant=self.other_tenant)
+        async def check(client):
+            base=f'/v1/tenants/{self.tenant}'
+            self.assertEqual((await client.get(base+'/me')).status_code,401)
+            self.assertEqual((await client.get(base+'/me',headers=self.bearer(iss='https://attacker.example'))).status_code,401)
+            self.assertEqual((await client.get(base+'/me',headers=self.bearer(sub=str(uuid4())))).status_code,404)
+            self.assertEqual((await client.get(base+'/me',headers=self.bearer())).json()['user_id'],str(self.user))
+            self.assertEqual((await client.get(base+f'/rides/{own}',headers=self.bearer())).status_code,200)
+            for inaccessible in (other,third,uuid4()):
+                self.assertEqual((await client.get(base+f'/rides/{inaccessible}',headers=self.bearer())).status_code,404)
+            self.assertEqual((await client.get(f'/v1/tenants/{uuid4()}/wallet',headers=self.bearer())).status_code,404)
+        self.http_checks(check)
+
+    def test_http_roles_come_from_database_and_denials_have_immutable_human_audit(self):
+        async def check(client):
+            base=f'/v1/tenants/{self.tenant}'
+            headers=self.bearer(roles=['super_admin'],tenant=str(self.other_tenant))
+            denied=await client.get(base+'/admin/audit-events',headers=headers)
+            self.assertEqual(denied.status_code,403)
+            request_id=denied.headers['x-request-id']
+            with psycopg.connect(DB_URL) as conn:
+                event=conn.execute('SELECT actor_id,outcome,request_id FROM tl.audit_events WHERE tenant_id=%s ORDER BY id DESC LIMIT 1',(self.tenant,)).fetchone()
+                self.assertEqual(event[:2],(self.user,'denied')); self.assertEqual(str(event[2]),request_id)
+                conn.execute("UPDATE tl.memberships SET roles=ARRAY['campaign_manager'] WHERE tenant_id=%s AND user_id=%s",(self.tenant,self.user))
+            profile=(await client.get(base+'/me',headers=headers)).json()
+            self.assertIn('campaign.manage',profile['allowed_actions']); self.assertNotIn('fraud.review',profile['allowed_actions'])
+            self.assertEqual((await client.get(base+'/admin/audit-events',headers=headers)).status_code,403)
+            with psycopg.connect(DB_URL) as conn:
+                conn.execute("UPDATE tl.memberships SET roles=ARRAY['fraud_reviewer'] WHERE tenant_id=%s AND user_id=%s",(self.tenant,self.user))
+            result=await client.get(base+'/admin/audit-events',headers=headers)
+            self.assertEqual(result.status_code,200)
+            self.assertTrue(all(entry['actor_id']==str(self.user) for entry in result.json()['entries']))
+            with psycopg.connect(DB_URL) as conn:
+                conn.execute("UPDATE tl.memberships SET roles=ARRAY['super_admin'] WHERE tenant_id=%s AND user_id=%s",(self.tenant,self.user))
+            self.assertIn('memberships.manage',(await client.get(base+'/me',headers=headers)).json()['allowed_actions'])
+        self.http_checks(check)
+        with psycopg.connect(DB_URL) as conn,self.assertRaises(psycopg.Error):
+            conn.execute('DELETE FROM tl.audit_events WHERE tenant_id=%s',(self.tenant,))
+
+    def test_wallet_http_balance_pagination_duplicate_retry_and_reversal_reconcile(self):
+        a=self.ride(); b=self.ride(); other=self.ride(user=self.other_user)
+        first=self.settle(a); self.assertEqual(self.settle(a),first); self.settle(b); self.settle(other)
+        with psycopg.connect(self.worker_url) as conn: conn.execute('SELECT tl.reverse_award(%s,%s)',(first,'TEST_VECTOR:wallet-correction'))
+        async def check(client):
+            base=f'/v1/tenants/{self.tenant}/wallet'
+            response=await client.get(base,params={'limit':1},headers=self.bearer())
+            self.assertEqual(response.status_code,200); self.assertEqual(response.json()['balance'],10)
+            entries=[]; page=response.json()
+            while True:
+                entries.extend(page['entries'])
+                if page['next_before'] is None: break
+                page=(await client.get(base+'/entries',params={'limit':1,'before':page['next_before']},headers=self.bearer())).json()
+            self.assertEqual(len(entries),3); self.assertEqual(sum(e['points'] for e in entries),10)
+            self.assertNotIn(str(other),json.dumps(entries))
+            self.assertEqual((await client.get(base,params={'limit':101},headers=self.bearer())).status_code,422)
+            self.assertEqual((await client.post(base,json={'points':999},headers=self.bearer())).status_code,405)
+            self.assertEqual((await client.get(f'/v1/tenants/{self.other_tenant}/wallet',headers=self.bearer())).json()['balance'],0)
+        self.http_checks(check)
+
+    def test_audit_context_and_reviewer_rls_do_not_leak_other_tenants(self):
+        with psycopg.connect(self.app_url) as conn,self.assertRaises(psycopg.Error):
+            conn.execute("SELECT tl.record_audit('profile.read','allowed','identity',%s,%s,'TEST_VECTOR')",(str(self.user),uuid4()))
+        with owned_transaction(self.app_url,self.principal,self.tenant) as (conn,_):
+            conn.execute("SELECT tl.record_audit('profile.read','allowed','identity',%s,%s,'TEST_VECTOR')",(str(self.user),uuid4()))
+            self.assertEqual(conn.execute('SELECT * FROM tl.audit_events').fetchall(),[])
+        with owned_transaction(self.app_url,self.principal,self.other_tenant) as (conn,_):
+            conn.execute("SELECT tl.record_audit('profile.read','allowed','identity',%s,%s,'TEST_VECTOR:other-tenant')",(str(self.user),uuid4()))
+        with psycopg.connect(DB_URL) as conn:
+            conn.execute("UPDATE tl.memberships SET roles=ARRAY['fraud_reviewer'] WHERE tenant_id=%s AND user_id=%s",(self.tenant,self.user))
+        with owned_transaction(self.app_url,self.principal,self.tenant) as (conn,_):
+            self.assertEqual([r[0] for r in conn.execute('SELECT tenant_id FROM tl.audit_events')],[self.tenant])
+
+    def test_boarding_accuracy_envelope_and_test_provenance_with_real_postgis(self):
+        with psycopg.connect(DB_URL) as conn:
+            version=import_catalog(conn,catalog_vector())
+            def evaluate(distance,accuracy=5,**kwargs):
+                lon,lat=conn.execute("SELECT ST_X(g::geometry),ST_Y(g::geometry) FROM (SELECT ST_Project(location,%s,0) g FROM tl.catalog_stops WHERE version=%s AND code='00001') s",(distance,version)).fetchone()
+                return boarding_proximity(conn,version=version,stop_code='00001',latitude=lat,longitude=lon,
+                                          accuracy_metres=accuracy,**kwargs)
+            self.assertEqual(evaluate(0).state,State.UNAVAILABLE)
+            self.assertEqual(evaluate(40,allow_test=True).state,State.PASSED)
+            self.assertEqual(evaluate(45,10,allow_test=True).state,State.UNAVAILABLE)
+            self.assertEqual(evaluate(70,allow_test=True).state,State.FAILED)
+            self.assertEqual(evaluate(0,75,allow_test=True).state,State.UNAVAILABLE)
+            self.assertEqual(evaluate(70,radius_metres=100,allow_test=True).state,State.PASSED)
+            for invalid in (float('nan'),-1,True):
+                with self.assertRaises(ValueError): evaluate(0,invalid,allow_test=True)
+
+    def test_service_catalog_direction_and_loop_occurrences_are_validated(self):
+        with psycopg.connect(DB_URL) as conn:
+            version=import_catalog(conn,catalog_vector())
+            params=dict(version=version,service='T1',operator='TEST',direction=1,boarding_sequence=1,alighting_sequence=3,
+                        boarding_stop='00001',alighting_stop='00001')
+            self.assertEqual(service_sequence(conn,**params).state,State.UNAVAILABLE)
+            self.assertEqual(service_sequence(conn,**params,allow_test=True).state,State.PASSED)
+            for changes in ({'service':'NO'},{'operator':'OTHER'},{'direction':2},{'alighting_sequence':1},{'alighting_stop':'00002'}):
+                with self.subTest(changes=changes):
+                    self.assertEqual(service_sequence(conn,**{**params,**changes},allow_test=True).state,State.FAILED)
+            self.assertEqual(service_sequence(conn,**{**params,'version':'f'*64},allow_test=True).state,State.UNAVAILABLE)
 
     def test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits(self):
         document=catalog_vector()

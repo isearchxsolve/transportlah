@@ -15,6 +15,11 @@ class Settings:
     api_service_token: str = field(default="", repr=False)
     database_url: str = field(default="", repr=False)
     redis_url: str = field(default="", repr=False)
+    commuter_api_enabled: bool = False
+    app_database_url: str = field(default="", repr=False)
+    oidc_issuer: str = ""
+    oidc_audience: str = ""
+    oidc_jwks_url: str = ""
     cache_ttl_seconds: float = 30.0
     min_poll_interval_seconds: float = 20.0
     upstream_timeout_seconds: float = 10.0
@@ -23,6 +28,10 @@ class Settings:
     active_stops: tuple[tuple[str, str | None], ...] = ()
 
     def __post_init__(self):
+        if type(self.commuter_api_enabled) is not bool:
+            raise ValueError('COMMUTER_API_ENABLED must be boolean')
+        if self.commuter_api_enabled and not all((self.app_database_url,self.oidc_issuer,self.oidc_audience,self.oidc_jwks_url)):
+            raise ValueError('Commuter API needs a separate DB login and provider configuration')
         if self.mode not in {"LIVE_NETWORK", "OFFLINE_FIXTURE"}:
             raise ValueError("LTA_MODE must be LIVE_NETWORK or OFFLINE_FIXTURE")
         for value in (self.cache_ttl_seconds, self.min_poll_interval_seconds, self.upstream_timeout_seconds):
@@ -44,6 +53,8 @@ class Settings:
 
     @classmethod
     def from_env(cls):
+        commuter_enabled=os.environ.get('COMMUTER_API_ENABLED','false').lower()
+        if commuter_enabled not in {'true','false'}: raise ValueError('COMMUTER_API_ENABLED must be true or false')
         key = os.environ.get("LTA_DATAMALL_KEY", "").strip()
         key_path = os.environ.get("LTA_KEY_PATH", "")
         if not key and key_path:
@@ -61,6 +72,11 @@ class Settings:
             api_service_token=os.environ.get("API_SERVICE_TOKEN", ""),
             database_url=os.environ.get("DATABASE_URL", ""),
             redis_url=os.environ.get("REDIS_URL", ""),
+            commuter_api_enabled=commuter_enabled=='true',
+            app_database_url=os.environ.get('APP_DATABASE_URL',''),
+            oidc_issuer=os.environ.get('OIDC_ISSUER',''),
+            oidc_audience=os.environ.get('OIDC_AUDIENCE',''),
+            oidc_jwks_url=os.environ.get('OIDC_JWKS_URL',''),
             cache_ttl_seconds=float(os.environ.get("CACHE_TTL_SECONDS", "30")),
             min_poll_interval_seconds=float(os.environ.get("MIN_POLL_INTERVAL_SECONDS", "20")),
             upstream_timeout_seconds=float(os.environ.get("UPSTREAM_TIMEOUT_SECONDS", "10")),

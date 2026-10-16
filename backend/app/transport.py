@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from datetime import datetime, timezone
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -104,6 +105,7 @@ class LiveTransport:
                         value = response.headers.get("Retry-After", "20")
                         try:
                             retry_after = min(300.0, max(20.0, float(value)))
+                            if not math.isfinite(float(value)): retry_after=20.0
                         except ValueError:
                             retry_after = 20.0
                     raise SourceUnavailable("LTA upstream rejected the request", status_code=502, retry_after=retry_after)

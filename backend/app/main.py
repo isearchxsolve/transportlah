@@ -9,7 +9,8 @@ import time
 from uuid import UUID, uuid4
 from typing import Annotated
 
-from fastapi import Depends, FastAPI, HTTPException, Path, Query
+from fastapi import Depends, FastAPI, HTTPException, Path, Query, Request
+from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 import psycopg
@@ -19,13 +20,17 @@ from .config import Settings
 from .ingestion import ArrivalService
 from .models import Arrivals
 from .transport import CaptureTransport, LiveTransport, SourceUnavailable
+from .identity import OIDCVerifier,AuthenticationFailed,Principal
+from .ownership import UnsafeDatabaseRole
+from .user_data import read_user_data,ActionDenied,ResourceMissing
+from .http_boundary import BoundedBodyMiddleware
 
 
 log = logging.getLogger("transportlah")
 bearer = HTTPBearer(auto_error=False)
 
 
-def create_app(settings=None):
+def create_app(settings=None,*,identity_verifier=None):
     if not log.handlers:
         handler = logging.StreamHandler()
         handler.setFormatter(logging.Formatter("%(message)s"))
@@ -33,6 +38,8 @@ def create_app(settings=None):
         log.setLevel(logging.INFO)
         log.propagate = False
     settings = settings or Settings.from_env()
+    verifier = (identity_verifier or OIDCVerifier(issuer=settings.oidc_issuer,audience=settings.oidc_audience,
+                jwks_url=settings.oidc_jwks_url)) if settings.commuter_api_enabled else None
     transport = LiveTransport(settings.lta_account_key, settings.upstream_timeout_seconds) if settings.mode == "LIVE_NETWORK" else CaptureTransport(settings.capture_dir)
     service = ArrivalService(transport, settings.cache_ttl_seconds, settings.min_poll_interval_seconds, settings.max_active_stops, settings.max_cache_entries)
 
@@ -47,10 +54,12 @@ def create_app(settings=None):
                 with suppress(asyncio.CancelledError):
                     await task
             await transport.close()
+            if verifier: await verifier.close()
 
     app = FastAPI(title="TransportLah ingestion foundation", version="0.1.0", lifespan=lifespan)
     app.state.settings = settings
     app.state.arrivals = service
+    app.add_middleware(BoundedBodyMiddleware)
 
     @app.middleware("http")
     async def request_log(request, call_next):
@@ -60,11 +69,56 @@ def create_app(settings=None):
         except (ValueError, AttributeError):
             request_id = str(uuid4())
         started = time.monotonic()
-        response = await call_next(request)
+        request.state.request_id=request_id
+        try:
+            response = await call_next(request)
+        except Exception:
+            response=JSONResponse(status_code=500,content={'detail':'Internal service failure','request_id':request_id})
         response.headers["X-Request-ID"] = request_id
         # Log only selected metadata, never query strings, credentials, body, GPS, or raw exceptions.
         log.info(json.dumps({"event": "http_request", "request_id": request_id, "method": request.method, "status": response.status_code, "duration_ms": round((time.monotonic() - started) * 1000, 3)}))
         return response
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_request(request,error):
+        return JSONResponse(status_code=422,content={'detail':[{'loc':list(e['loc']),'type':e['type']} for e in error.errors()],
+                            'request_id':request.state.request_id})
+
+    async def commuter(credentials: Annotated[HTTPAuthorizationCredentials | None,Depends(bearer)]):
+        if verifier is None: raise HTTPException(503,'Commuter identity is not configured')
+        if credentials is None: raise HTTPException(401,'Commuter authorization required',headers={'WWW-Authenticate':'Bearer'})
+        try: return await verifier.verify(credentials.credentials)
+        except AuthenticationFailed:
+            raise HTTPException(401,'Invalid commuter authorization',headers={'WWW-Authenticate':'Bearer'}) from None
+
+    def owner_read(request,tenant_id,principal,action,**kwargs):
+        try:
+            return read_user_data(settings.app_database_url,principal,tenant_id,action,UUID(request.state.request_id),**kwargs)
+        except UnsafeDatabaseRole: raise HTTPException(503,'Commuter database role is unsafe') from None
+        except (PermissionError,ResourceMissing): raise HTTPException(404,'Resource not found') from None
+        except ActionDenied: raise HTTPException(403,'Action is not permitted') from None
+        except psycopg.Error: raise HTTPException(503,'Commuter data is unavailable') from None
+
+    @app.get('/v1/tenants/{tenant_id}/me')
+    def me(tenant_id:UUID,request:Request,principal:Annotated[Principal,Depends(commuter)]):
+        return owner_read(request,tenant_id,principal,'profile.read')
+
+    @app.get('/v1/tenants/{tenant_id}/rides/{ride_id}')
+    def ride(tenant_id:UUID,ride_id:UUID,request:Request,principal:Annotated[Principal,Depends(commuter)]):
+        return owner_read(request,tenant_id,principal,'ride.read',resource=ride_id)
+
+    @app.get('/v1/tenants/{tenant_id}/wallet')
+    @app.get('/v1/tenants/{tenant_id}/wallet/entries')
+    def wallet(tenant_id:UUID,request:Request,principal:Annotated[Principal,Depends(commuter)],
+               before:Annotated[int|None,Query(ge=1,le=9223372036854775807)]=None,
+               limit:Annotated[int,Query(ge=1,le=100)]=20):
+        return owner_read(request,tenant_id,principal,'wallet.read',before=before,limit=limit)
+
+    @app.get('/v1/tenants/{tenant_id}/admin/audit-events')
+    def audit_events(tenant_id:UUID,request:Request,principal:Annotated[Principal,Depends(commuter)],
+                     before:Annotated[int|None,Query(ge=1,le=9223372036854775807)]=None,
+                     limit:Annotated[int,Query(ge=1,le=100)]=20):
+        return owner_read(request,tenant_id,principal,'audit.read',before=before,limit=limit)
 
     async def authorize(credentials: Annotated[HTTPAuthorizationCredentials | None, Depends(bearer)]):
         if not settings.api_service_token:

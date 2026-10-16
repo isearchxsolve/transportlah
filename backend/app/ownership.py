@@ -5,6 +5,9 @@ import psycopg
 from backend.app.identity import Principal
 
 
+class UnsafeDatabaseRole(PermissionError): pass
+
+
 def assert_app_role(conn):
     row=conn.execute("""
     SELECT r.rolsuper,r.rolbypassrls,
@@ -14,14 +17,15 @@ def assert_app_role(conn):
     FROM pg_roles r WHERE r.rolname=current_user
     """).fetchone()
     if not row or any(row):
-        raise PermissionError('Commuter database role must not own/bypass tables or inherit worker permissions')
+        raise UnsafeDatabaseRole('Commuter database role must not own/bypass tables or inherit worker permissions')
 
 
 @contextmanager
 def owned_transaction(url,principal,tenant_id):
     if not isinstance(principal,Principal): raise TypeError('Verified Principal required')
     tenant=UUID(str(tenant_id))
-    with psycopg.connect(url) as conn:
+    with psycopg.connect(url,connect_timeout=3) as conn:
+        conn.execute("SET LOCAL statement_timeout='3s'")
         assert_app_role(conn)
         identity=conn.execute('SELECT * FROM tl.resolve_identity(%s,%s,%s)',(principal.issuer,principal.subject,tenant)).fetchone()
         if not identity: raise PermissionError('No tenant membership')

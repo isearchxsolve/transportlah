@@ -26,6 +26,7 @@ def main():
         ("syntax", [sys.executable, "-m", "compileall", "-q", "backend", "tools", "demo_runner.py"], root),
     ]
     if os.getenv('TL_REQUIRE_DATABASE') == '1':
+        checks.append(('access_controls', [sys.executable, 'tools/check_access_controls.py'], root))
         checks.append(('real_dependency_gate', [sys.executable, 'tools/check_dependencies.py'], root))
     results = []
     for name, command, cwd in checks:
