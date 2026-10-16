@@ -15,7 +15,9 @@ def main():
     with psycopg.connect(database,connect_timeout=3) as conn: conn.execute('SELECT PostGIS_Version()').fetchone()
     try:
         with psycopg.connect(make_conninfo(database,password=uuid4().hex),connect_timeout=3): pass
-    except psycopg.OperationalError: pass
+    except psycopg.OperationalError as error:
+        if 'password authentication failed' not in str(error).lower():
+            raise SystemExit('Negative database authentication check was inconclusive') from None
     else: raise SystemExit('Database accepted an incorrect password')
     target=urlsplit(redis_url)
     if not target.password: raise SystemExit('Authenticated Redis URL required')

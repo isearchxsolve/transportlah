@@ -10,6 +10,7 @@ class BoundedBodyMiddleware:
         lengths=[v for k,v in scope['headers'] if k.lower()==b'content-length']
         status=None
         if lengths and (len(lengths)!=1 or not lengths[0].isdigit()): status=400
+        elif lengths and len(lengths[0])>20: status=413
         elif lengths and int(lengths[0])>self.maximum: status=413
         if status:
             return await JSONResponse({'detail':'Invalid or oversized request body'},status_code=status)(scope,receive,send)
@@ -23,6 +24,8 @@ class BoundedBodyMiddleware:
                 return await JSONResponse({'detail':'Request body exceeds capacity'},status_code=413)(scope,receive,send)
             body.extend(chunk)
             if not message.get('more_body',False): break
+        if lengths and int(lengths[0])!=len(body):
+            return await JSONResponse({'detail':'Request length mismatch'},status_code=400)(scope,receive,send)
         sent=False
         async def replay():
             nonlocal sent

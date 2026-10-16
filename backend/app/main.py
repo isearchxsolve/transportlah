@@ -1,4 +1,4 @@
-"""Ingestion API only. No rider verification, rewards, or production auth claims."""
+"""Operator ingestion and optionally configured authenticated commuter reads."""
 
 import asyncio
 from contextlib import asynccontextmanager, suppress

@@ -28,6 +28,11 @@ class HttpBoundaryChecks(unittest.IsolatedAsyncioTestCase):
         response=await self.client.post('/unknown',content=chunks())
         self.assertEqual(response.status_code,413)
 
+    async def test_invalid_and_mismatched_lengths_are_rejected_without_echo(self):
+        for value,status in (('bad',400),('9'*5000,413),('0',400)):
+            response=await self.client.post('/unknown',content=b'x',headers={'Content-Length':value})
+            self.assertEqual(response.status_code,status)
+
     async def test_validation_errors_and_logs_do_not_echo_credentials_or_location(self):
         marker='TEST_VECTOR:private-coordinate-or-token'
         with self.assertLogs('transportlah',level='INFO') as captured:
