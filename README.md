@@ -16,6 +16,8 @@ Corrected ingestion plus verification, spatial, identity and reward foundations 
 - Versioned native-geography schema, matching indexes, restricted commuter/worker roles and immutable verification/points ledger.
 - Managed-provider asymmetric JWT verifier, server memberships and transaction-local owner/tenant RLS.
 - Worker-only atomic settlement, exact retries, gross daily cap and immutable reversals.
+- Opt-in provider-authenticated profile, owner ride/wallet and tenant reviewer audit reads, with server role actions and immutable human-identity access records.
+- Catalog-backed boarding-accuracy envelopes and service/direction/occurrence checks; TEST_VECTOR catalogs cannot pass by default.
 - Bounded paginated stops/services/routes collector, immutable versioned catalog import, direction/loop occurrences and conservative chord provenance. Real-key catalog capture remains pending.
 
 ## Quick start on Windows
@@ -78,7 +80,9 @@ python tools/check_dependencies.py
 
 The laptop has no Docker executable. GitHub CI now executes actual PostgreSQL16/PostGIS and Redis7.4 containers, migrations, real login/RLS/concurrency checks, policy/crypto/ingestion checks, unchanged master tests and readiness. Push triggers are restricted to backend/tool/dependency/workflow changes; manual dispatch is available. Output/source hashes are saved as an artifact. Product Docker-image builds and mobile/device builds remain pending. See `docs/HIGH_PASS_RECEIPT.md` for the executed run.
 
-Run `python tools/migrate.py` with an explicitly privileged MIGRATION_DATABASE_URL to apply the schema. Provision separate server-only login users inheriting either transportlah_app or transportlah_worker; commuter logins must not own tables, bypass RLS or inherit worker permissions. See `docs/IDENTITY_REWARD_CONTRACT.md`. Do not deploy commuter paths using the administrator DATABASE_URL. Provider/HTTP integration remains pending.
+Run `python tools/migrate.py` with an explicitly privileged MIGRATION_DATABASE_URL to apply all three schema migrations. Provision separate server-only logins inheriting either transportlah_app or transportlah_worker; commuter logins must not own tables, bypass RLS or inherit worker permissions. See `docs/IDENTITY_REWARD_CONTRACT.md`. Never use administrator DATABASE_URL as APP_DATABASE_URL. Client provider provisioning/handshake remains pending; the HTTP boundary is implemented/tested.
+
+To opt into read endpoints, configure COMMUTER_API_ENABLED=true, APP_DATABASE_URL, OIDC_ISSUER, OIDC_AUDIENCE and the fixed HTTPS OIDC_JWKS_URL. Provision (issuer,subject) identities and tenant memberships through trusted administration. Missing configuration fails closed; the default is false. Profile/ride/wallet reads are owner-scoped; audit reads require reviewer/admin actions. No HTTP endpoint can submit a score or credit points. Request bodies are capped256KiB and validation/log output omits input/credentials/location.
 
 ## Important boundaries
 
@@ -86,7 +90,7 @@ Run `python tools/migrate.py` with an explicitly privileged MIGRATION_DATABASE_U
 - All three captured candidates have `Monitored=0` and zero coordinates. Their estimated arrival times are usable as historical schedule context; vehicle position and passenger presence are not established.
 - Cache/budgets are process-local. Run one worker; multi-worker/multi-instance Redis coordination is not implemented. The 20-second setting reflects documented refresh cadence, not a proven account-wide quota agreement.
 - Freshness describes the locally captured source snapshot, not the unknown precise vehicle-position observation time.
-- Policy core, schema, JWT/RLS boundary and settlement functions are implemented/tested. Real evaluators, provider/HTTP integration, catalogs, admin permissions, ranking/contest flows, Flutter/device validation and release remain pending.
+- Policy/schema, authenticated read boundaries, audit/role engine, settlement, boarding proximity and service-sequence evaluators are implemented/tested. Real provider/catalog provisioning, remaining evaluators, ride mutations, campaign/admin product screens, rankings/contests, Flutter/device validation and release remain pending.
 - H01-H03 are resolved; their contracts are linked in `docs/HIGH_MODE_QUEUE.md`.
 
 ## Resume documents

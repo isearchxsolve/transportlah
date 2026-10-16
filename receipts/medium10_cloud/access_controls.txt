@@ -1,0 +1,1 @@
+{"postgres_authenticated": true, "postgres_wrong_password_rejected": true, "redis_authenticated": true, "redis_missing_and_wrong_password_rejected": true}

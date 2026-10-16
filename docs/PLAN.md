@@ -1,7 +1,7 @@
 # TransportLah execution checklist
 
-Date: 2026-10-15 (Asia/Calcutta)
-Status: Three High items resolved; API contract drafted; immutable catalog importer implemented. Real PostGIS/Redis cloud checks exist. Full product, live catalog/multi-stop and physical-device acceptance remain pending. Completed checklist tasks: 20/87.
+Date: 2026-10-16 (Asia/Calcutta)
+Status: Ten additional priority engineering tasks complete with receipts. Completed checklist tasks: 30/87. Live company-key/provider/device/product acceptance remains separately gated.
 
 ## Working basis
 
@@ -48,10 +48,10 @@ Gate: Every mandatory feature has an acceptance criterion; product scope and unr
 - [x] F00 Create `backend/app`, `backend/tests`, `backend/migrations`, `mobile`, and `docs` without overwriting historical artifacts. Mobile/migrations are boundary documentation, not completed clients/schemas.
 - [x] F01 Pin backend dependencies and document lightweight local setup and cloud build commands. Receipts: requirements files and README.
 - [x] F02 Define environment configuration and a secret-free example file; ignore real credentials and private captures. Private .env generated without printing credentials; reviewed project files contain no generated secret values.
-- [ ] F03 Configure PostgreSQL/PostGIS and Redis with authenticated access and restricted development exposure.
-- [ ] F04 Add versioned migrations for users, stops, route patterns, rides, observations, verification outcomes, and audit events. Partial: foundation schema/migration and real-engine rerun checks complete; full admin/human audit events remain pending.
-- [ ] F05 Implement authentication and distinguish commuter, campaign manager, fraud reviewer, and administrator permissions. Partial: asymmetric OIDC verifier, membership resolution, actual non-owner RLS/login checks complete; provider and HTTP/admin integration pending.
-- [ ] F06 Add request validation, authenticated ownership checks, request IDs, and structured logs with secret/location redaction.
+- [x] F03 Configure PostgreSQL/PostGIS and Redis with authenticated access and restricted development exposure. Receipt: Authenticated loopback PostGIS/Redis configuration plus successful/wrong-password/anonymous-access CI checks; see MEDIUM_TEN_RECEIPT.md.
+- [x] F04 Add versioned migrations for users, stops, route patterns, rides, observations, verification outcomes, and audit events. Receipt: Migrations001-003 cover identity/catalog/ride/evidence/ledger and immutable human-identity audit events; actual DB reruns and access/audit checks pass.
+- [x] F05 Implement authentication and distinguish commuter, campaign manager, fraud reviewer, and administrator permissions. Receipt: Provider JWT verifier, server role/action engine and authenticated HTTP read boundaries pass real DB/generated-signed-token checks. Client provider provisioning/handshake and campaign product screens remain deployment/product work.
+- [x] F06 Add request validation, authenticated ownership checks, request IDs, and structured logs with secret/location redaction. Receipt: Current endpoints have typed request validation, bounded/redacted bodies/errors, UUID request IDs, verified owner/tenant checks and selected-metadata logs. New mutation endpoints must retain these controls.
 - [x] F07 Add health/readiness endpoints that distinguish process health, database health, and upstream availability. Local HTTP health=200, readiness=503 truthfully reports unavailable PostGIS/Redis; no dependency success claimed.
 - [ ] F08 Establish backend CI, migration checks, Flutter build checks, and immutable master-test execution; disclose failures honestly. Partial: real backend/PostGIS/Redis CI and unchanged master suite pass; Flutter checks remain pending.
 - [x] F09 Define receipt storage: commit SHA, test commands/results, capture provenance, deployment identity, known limits, and hashes. Receipts: `receipts/checks.json`, raw check outputs, local HTTP smoke, seed manifest, and the implementation commit recorded in STATE. Local execution is distinguished from absent live/cloud/device acceptance.
@@ -63,11 +63,11 @@ Gate: A clean checkout can start the backend, apply migrations, authenticate, an
 - [ ] I00 Verify a configured LTA key against the real endpoint without printing it; preserve sanitized request/response metadata and original capture time.
 - [ ] I01 Capture authentic BusArrival responses for multiple real stops and record endpoint, parameters, response hash, and provenance.
 - [x] I02 Parse NextBus/NextBus2/NextBus3 as separate arrival candidates; preserve ETA separately from fetch time and any documented observation time. Exercised on unchanged historical capture; zero locations remain unavailable and observation time is not invented.
-- [ ] I03 Handle Monitored, empty fields, absent services, malformed upstream responses, and estimated-location uncertainty without invented values.
+- [x] I03 Handle Monitored, empty fields, absent services, malformed upstream responses, and estimated-location uncertainty without invented values. Receipt: Monitoring/empty/missing/malformed/uncertain-location cases and bounded HTTP timeout/error/backoff cases pass. Generated edge mutations are labelled; original historical capture remains unchanged.
 - [x] I04 Implement active-stop polling, per-stop limits, request coalescing, TTL caching, timeouts, and bounded backoff. Local replay/burst/elapsed-time/lifespan checks pass; live HTTP error/backoff integration and distributed coordination remain unverified/unimplemented respectively.
 - [ ] I05 Import paginated BusStops, BusServices, and BusRoutes; preserve direction, stop sequence, visit information, and source version. Partial: fixed-endpoint bounded collector, normalized immutable catalog snapshots, migration002 and generated/real-DB checks implemented. Company-key collection/import and consistency review remain pending; no live catalog acceptance claimed.
-- [ ] I06 Implement LIVE_NETWORK and authentic-capture replay transports using the same parser and validation path; fail clearly when capture data is absent.
-- [ ] I07 Add ingestion checks for cache expiry, duplicate requests, multiple stops, service filtering, and upstream failure handling; use genuine captures and actual request-count receipts.
+- [x] I06 Implement LIVE_NETWORK and authentic-capture replay transports using the same parser and validation path; fail clearly when capture data is absent. Receipt: Both transports execute through the same parser; unaltered payload/service/ETA equality, provenance separation, absent-capture and no-fallback checks pass. Company-key handshake remains I00.
+- [x] I07 Add ingestion checks for cache expiry, duplicate requests, multiple stops, service filtering, and upstream failure handling; use genuine captures and actual request-count receipts. Receipt: Historical-capture expiry/coalescing/multi-stop-unavailable/service/request-count checks and generated HTTP failure cases pass. One recorded stop is available; no second genuine stop is invented.
 - [ ] I08 Document current upstream contracts and limitations; demonstrate multi-stop processing and rate-limit behavior with live proof clearly distinguished from replay results.
 
 Gate: Multiple real stops are processed correctly; rate-limit behavior is evidenced; replay is traceable to authentic captures. ETA is never treated as vehicle-position observation time, and three different buses are never joined into one trajectory.
@@ -76,8 +76,8 @@ Gate: Multiple real stops are processed correctly; rate-limit behavior is eviden
 
 - [x] V00 Design route geometry provenance; do not describe straight lines between stops as surveyed road paths. Receipt: SPATIAL_CONTRACT and schema source-version/quality/stop-occurrence fields.
 - [x] V01 Choose metre-correct PostGIS geography or a suitable projected coordinate system; create indexes matching the actual query expressions. Receipt: native geography/GiST schema and real default-planner/boundary checks.
-- [ ] V02 Implement boarding-stop proximity using reported device accuracy and configurable tolerances.
-- [ ] V03 Validate selected service, direction, and stop sequence against imported official records.
+- [x] V02 Implement boarding-stop proximity using reported device accuracy and configurable tolerances. Receipt: PostGIS accuracy-envelope boarding evaluator implemented; inside/ambiguous/outside/poor-accuracy/configuration/test-provenance checks pass. Real field calibration remains V10-V12.
+- [x] V03 Validate selected service, direction, and stop sequence against imported official records. Receipt: Versioned catalog service/operator/direction/downstream stop-occurrence validation implemented and tested on imported TEST_VECTOR records. Actual company-key catalog import remains I05.
 - [ ] V04 Evaluate live/recent arrival context with freshness and Monitored quality; do not claim it proves passenger presence.
 - [ ] V05 Evaluate forward route progress and corridor fit; handle stops, detours, GPS gaps, and ambiguous parallel corridors conservatively.
 - [ ] V06 Evaluate speed and motion features as supporting signals; do not classify bus versus car using the 12-65 km/h range alone.
@@ -112,7 +112,7 @@ Gate: A consenting tester can start, record, finish, and inspect a real bus ride
 
 - [ ] R00 Implement an append-only points ledger with transaction-safe, idempotent awards and auditable reversals/adjustments. Partial: worker-only award/reversal, immutable snapshots, concurrent retries/cap and exact negatives pass; authorized human corrections/API still pending.
 - [x] R01 Configure verified/probable/low-confidence reward rules separately from ranking and contest trust requirements. Versioned policy and SQL guards complete; provisional economic defaults require client confirmation.
-- [ ] R02 Implement wallet balance and history derived from the ledger; reconcile duplicate events and failed transactions.
+- [x] R02 Implement wallet balance and history derived from the ledger; reconcile duplicate events and failed transactions. Receipt: Owner-scoped ledger wallet/history HTTP reads with stable pagination; duplicate retries, failed transactions, cap and exact reversals reconcile in actual DB tests. Flutter wallet presentation remains client work.
 - [ ] R03 Implement streaks, badges, and levels with configurable rules and reproducible calculations.
 - [ ] R04 Implement verified-only rankings with display names, period rollover, tie rules, and privacy preferences.
 - [ ] R05 Rebuild Redis rankings from durable PostgreSQL records and verify reconciliation after cache loss.

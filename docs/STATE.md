@@ -1,16 +1,16 @@
 # TransportLah resume state
 
-Updated: 2026-10-15 (Asia/Calcutta).
+Updated: 2026-10-16 (Asia/Calcutta).
 
 ## Current outcome
 
-The user-selected High pass resolved H01, H02 and H03. Routine Medium work resumed with the API contract and immutable catalog importer. PLAN has 20/87 completed tasks with partial work disclosed against other IDs. Full MVP, genuine passenger verification and mobile clients remain pending.
+The user-selected High pass resolved H01-H03. The latest ten-item Medium batch is complete: F03,F04,F05,F06,I03,I06,I07,V02,V03,R02. PLAN has30/87 completed engineering tasks; live/company-provider/device and full-MVP acceptance remain separately gated. No new High item was parked.
 
 - H01: original seven weights, conservative missing-data/validity rules, independent score/tier/reward/ranking/contest eligibility and bus/rail contract. Twelve generated policy checks.
 - H02: versioned native geography schema and matching GiST queries; geometry quality/source/stop occurrences; independent arrival ETA/capture/position time. Actual PostGIS metre-boundary, default-planner index and 2,000-pair spherical differential checks.
 - H03: asymmetric provider JWT validation, fixed bounded JWKS, server-owned identity/membership mapping, non-owner commuter RLS, worker-only atomic settlement, daily-cap serialization and exact immutable reversals. Generated cryptographic and actual-login/concurrency database tests.
 
-No commuter/admin/score-submission/settlement HTTP endpoint has been opened. Health/readiness still advertise verification_enabled=false. The ingestion service credential remains server/operator-only.
+Opt-in authenticated read endpoints now cover profile, owner ride/wallet and tenant reviewer audit records. COMMUTER_API_ENABLED defaultsfalse and requires separate non-owner DB plus provider configuration. Score-submission, settlement and ride-mutation HTTP endpoints remain closed. Health/readiness still advertise verification_enabled=false. The ingestion credential is server/operator-only.
 
 ## Evidence and repository
 
@@ -26,10 +26,10 @@ Latest Medium catalog batch: tested source4b24bfdf802805b1b9b04ce8441f759396b0b2
 
 ## Exact next implementation work
 
-1. Implement the drafted commuter/admin ride lifecycle API contracts (B05 complete), using verified bearer/owner isolation and transactional idempotency.
+1. Implement ride lifecycle/start/ping/end mutations (V09) using the completed identity/read boundary and transactional idempotency; never accept client scores.
 2. Execute the implemented paginated catalog collector/importer (I05 partial) with the company LTA key; review genuine consistency before promotion. Catalog snapshots and chord geometry are immutable and versioned.
-3. Implement observation evaluators (V02-V07) and active-ride event order/replay/accuracy/lifecycle checks (V09). The policy consumes evaluated factors; it does not yet derive them from device traces.
-4. Provision the managed OIDC provider and separate DB logins; integrate verified bearer ownership before enabling commuter endpoints. Admin action permissions and human case/actor audit remain pending.
+3. Boarding proximity and service/direction/occurrence checks V02/V03 are implemented/tested. Continue V04-V07 context/progression/motion/alighting and genuine field validation.
+4. Provision the client-managed OIDC provider and separate DB logins; execute the real provider handshake before deployment. Role actions, HTTP ownership and human-identity access audit now pass; human fraud-case decisions/corrections and campaign product flows remain pending.
 5. Build Flutter active-ride flows and execute separate simulator/build/device gates.
 
 No fundamental item remains parked from this pass. Add a specific new entry if route ambiguity/signal fusion or final security review exposes a new complex question.
@@ -50,7 +50,10 @@ The client access email remains an unsent draft in docs/EMAIL_DRAFT_CLIENT_ACCES
 - docs/VERIFICATION_CONTRACT.md: deterministic evidence/score/tier and bus/rail rules.
 - docs/SPATIAL_CONTRACT.md: geography/index/time/provenance and differential boundaries.
 - docs/IDENTITY_REWARD_CONTRACT.md: trust, roles, RLS, settlement/reversal and acceptance boundaries.
-- docs/API_CONTRACT.md: commuter/operator/admin endpoints, lifecycle, retry, clock/upload and action-permission rules; only operator endpoints currently exposed.
+- docs/API_CONTRACT.md: implemented operator/optional owner-wallet-reviewer reads and designed lifecycle/product endpoints, retry/clock/upload/action rules.
+- docs/MEDIUM_TEN_RECEIPT.md and receipts/medium10_cloud: latest ten-item completion matrix,91 cloud tests with zero skips, authenticated service checks, source/output hashes and exact tested SHA.
+- docs/EMAIL_DRAFT_PROGRESS_30_OF_87.md: detailed client progress email prepared for review; no message sent.
+- docs/ACCESS_AND_READ_API.md: tested optional read/audit/role boundary, infrastructure configuration and evaluator semantics.
 - docs/CATALOG_IMPORT.md and backend/app/catalog.py: bounded paginated captures, integrity/normalization, immutable snapshots and transactional import; no real-key capture or active-catalog promotion yet.
 - backend/migrations/001_foundation.sql and tools/migrate.py: privileged versioned migration and grants.
 - backend/tests/test_database.py: actual PostGIS/login/RLS/concurrency checks; local skips are not acceptance.

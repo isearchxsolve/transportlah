@@ -1,0 +1,42 @@
+{
+  "previous_completed": [
+    "B00",
+    "B01",
+    "B02",
+    "B03",
+    "B04",
+    "B05",
+    "B06",
+    "B07",
+    "B08",
+    "F00",
+    "F01",
+    "F02",
+    "F07",
+    "F09",
+    "I02",
+    "I04",
+    "V00",
+    "V01",
+    "V08",
+    "R01"
+  ],
+  "newly_completed": [
+    "F03",
+    "F04",
+    "F05",
+    "F06",
+    "I03",
+    "I06",
+    "I07",
+    "V02",
+    "V03",
+    "R02"
+  ],
+  "previous_count": 20,
+  "new_count": 10,
+  "completed_count": 30,
+  "total_count": 87,
+  "basis": "Engineering checklist implementation/test completion; not field/client milestone acceptance",
+  "receipt": "docs/MEDIUM_TEN_RECEIPT.md"
+}

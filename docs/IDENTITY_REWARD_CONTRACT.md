@@ -1,6 +1,6 @@
 # Identity, ownership and durable reward contract
 
-Engineering resolution of H03, 2026-10-15. Implemented components: `backend/app/identity.py`, `ownership.py`, `verification.py`, versioned SQL migration and generated crypto/real-database security tests. Commuter and admin HTTP endpoints remain disabled until provisioning and lifecycle/evaluator integration; the operator ingestion credential must never go into Flutter.
+Engineering resolution of H03, updated2026-10-16. Identity, ownership, permissions, audit and wallet/ride read HTTP boundaries are implemented and tested. They are opt-in through COMMUTER_API_ENABLED plus provider/separate app-DB configuration; default configuration keeps them unavailable. Ride mutation, campaign/review product flows and evidence publication remain closed. Operator credentials never go into Flutter.
 
 ## Identity and authorization
 
@@ -12,7 +12,7 @@ Provision memberships from trusted administration, not client claims or automati
 
 RLS restricts rides, pings, verification and ledger reads to both tenant and owner, with an existing membership. Missing context yields no rows. Connection transaction completion clears context. Backend credentials stay server-side; a compromised database login could set its own context, so RLS complements the verified HTTP/backend boundary rather than replacing it.
 
-The schema stores commuter, super-admin, campaign-manager, sponsor-admin, support-agent, fraud-reviewer and analyst roles. This release grants all commuter connections only owner reads. Admin authorization must implement explicit action permissions before enabling admin endpoints: campaign/sponsor management scoped to their tenant and sponsor; support limited to necessary metadata; fraud review audited and scoped; analysts aggregate outputs without raw traces; super-admin authority explicitly assigned. Storing a role name does not enable those endpoints.
+The schema stores commuter, super-admin, campaign-manager, sponsor-admin, support-agent, fraud-reviewer and analyst roles. `permissions.py` maps explicit actions, defaulting to denied. HTTP /me exposes server-derived allowed actions; review/admin roles alone may read tenant-scoped audit events. Campaign/sponsor management still needs sponsor-bound product endpoints; support search, fraud decisions and analyst aggregates remain future product work. No role name enables an unimplemented endpoint.
 
 ## Database roles and function boundaries
 
@@ -36,6 +36,6 @@ Rankings must select verified Tier 2+ durable decisions, apply current allowed-m
 
 Crypto tests exercise correct/wrong signatures, issuer/audience, expiry/future issuance, missing claims, unsigned tokens, attacker key URLs and unknown-key refresh storms. Real PostGIS tests use separate actual app/worker login roles; check cross-user/cross-tenant/no-context RLS, missing membership, privileged-role rejection, denied commuter credit, 12 concurrent retries, 15 concurrent rides against the cap, atomic rejection, immutable evidence and eight concurrent reversals. All generated tenants/identities/rides are explicitly test data in a disposable CI database.
 
-Client provider configuration, real login handshake, account lifecycle, HTTP ownership enforcement, server factor evaluators, trusted boarding proof and genuine ride acceptance remain external or implementation gates. The resolved design and executed foundations do not constitute a finished authentication/rewards product.
+HTTP ownership/role reads and immutable human-identity access auditing now pass real-login/database integration with generated signed JWTs. Client provider provisioning/handshake, account lifecycle, ride mutations, remaining factor evaluators, trusted boarding proof, campaign/review screens and genuine ride acceptance remain external or implementation gates.
 
 Primary references: [PyJWT validation](https://pyjwt.readthedocs.io/en/stable/usage.html), [PostgreSQL row security](https://www.postgresql.org/docs/16/ddl-rowsecurity.html), [transaction isolation](https://www.postgresql.org/docs/16/transaction-iso.html).

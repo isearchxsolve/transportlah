@@ -63,7 +63,7 @@ Required output: a reviewed schema/query plan, matched index strategy, spherical
 
 ## H03 - Commuter identity, authorization, and reward transaction design
 
-Status: RESOLVED. Provider-backed JWT verifier, server membership/owner boundary, restricted database roles, immutable settlement and reversals are implemented and tested. Real-provider provisioning, commuter/admin endpoints and evidence-evaluator integration remain product tasks.
+Status: RESOLVED. JWT/HTTP owner and role reads, restricted DB roles, human-identity access audit, wallet reads, immutable settlement/reversals are implemented/tested. Real provider provisioning, ride mutations, campaign/fraud product endpoints and remaining evaluators stay product tasks.
 Outputs: `docs/IDENTITY_REWARD_CONTRACT.md`, `backend/app/identity.py`, `ownership.py`, migration and crypto/real-database security tests. HTTP settlement remains closed.
 PLAN dependencies: F04-F05, C01, R00-R02, R07-R11.
 

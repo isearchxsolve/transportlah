@@ -1,0 +1,115 @@
+test_capture_window_and_timezone_are_required (test_catalog.CatalogChecks.test_capture_window_and_timezone_are_required) ... ok
+test_direction_and_repeated_stop_occurrences_remain_distinct (test_catalog.CatalogChecks.test_direction_and_repeated_stop_occurrences_remain_distinct) ... ok
+test_duplicate_stop_and_service_records_fail_even_when_identical (test_catalog.CatalogChecks.test_duplicate_stop_and_service_records_fail_even_when_identical) ... ok
+test_missing_terminal_dataset_out_of_order_and_duplicate_pages_fail (test_catalog.CatalogChecks.test_missing_terminal_dataset_out_of_order_and_duplicate_pages_fail) ... ok
+test_nonfinite_zero_and_bad_range_coordinates_fail (test_catalog.CatalogChecks.test_nonfinite_zero_and_bad_range_coordinates_fail) ... ok
+test_tampered_raw_capture_and_missing_provenance_are_rejected (test_catalog.CatalogChecks.test_tampered_raw_capture_and_missing_provenance_are_rejected) ... ok
+test_unknown_stops_missing_services_sequence_gaps_and_backwards_distance_fail (test_catalog.CatalogChecks.test_unknown_stops_missing_services_sequence_gaps_and_backwards_distance_fail) ... ok
+test_actual_pagination_parameters_do_not_follow_untrusted_next_links (test_catalog.CatalogTransportChecks.test_actual_pagination_parameters_do_not_follow_untrusted_next_links) ... ok
+test_no_key_is_an_explicit_error (test_catalog.CatalogTransportChecks.test_no_key_is_an_explicit_error) ... ok
+test_repeated_full_page_and_page_limit_fail (test_catalog.CatalogTransportChecks.test_repeated_full_page_and_page_limit_fail) ... Executing <Task finished name='Task-11' coro=<CatalogTransportChecks.test_repeated_full_page_and_page_limit_fail() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_catalog.py:98> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.109 seconds
+ok
+test_upstream_denial_malformed_and_oversize_responses_fail_without_fallback (test_catalog.CatalogTransportChecks.test_upstream_denial_malformed_and_oversize_responses_fail_without_fallback) ... ok
+test_active_ride_and_test_evidence_in_production_rejected_atomically (test_database.DatabaseChecks.test_active_ride_and_test_evidence_in_production_rejected_atomically) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_audit_context_and_reviewer_rls_do_not_leak_other_tenants (test_database.DatabaseChecks.test_audit_context_and_reviewer_rls_do_not_leak_other_tenants) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_authenticated_http_owner_tenant_and_missing_identity_boundaries (test_database.DatabaseChecks.test_authenticated_http_owner_tenant_and_missing_identity_boundaries) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_boarding_accuracy_envelope_and_test_provenance_with_real_postgis (test_database.DatabaseChecks.test_boarding_accuracy_envelope_and_test_provenance_with_real_postgis) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_catalog_sql_failure_after_stop_inserts_rolls_back_new_version (test_database.DatabaseChecks.test_catalog_sql_failure_after_stop_inserts_rolls_back_new_version) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits (test_database.DatabaseChecks.test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_commuter_cannot_write_award_or_invoke_worker_function (test_database.DatabaseChecks.test_commuter_cannot_write_award_or_invoke_worker_function) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_concurrent_award_retries_credit_once (test_database.DatabaseChecks.test_concurrent_award_retries_credit_once) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_concurrent_different_rides_respect_gross_daily_cap (test_database.DatabaseChecks.test_concurrent_different_rides_respect_gross_daily_cap) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_conflicting_retry_cannot_rewrite_decision (test_database.DatabaseChecks.test_conflicting_retry_cannot_rewrite_decision) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_eta_and_capture_time_are_never_position_observation_time (test_database.DatabaseChecks.test_eta_and_capture_time_are_never_position_observation_time) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_gist_plan_uses_matching_native_geography_index (test_database.DatabaseChecks.test_gist_plan_uses_matching_native_geography_index) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_http_roles_come_from_database_and_denials_have_immutable_human_audit (test_database.DatabaseChecks.test_http_roles_come_from_database_and_denials_have_immutable_human_audit) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_invalid_catalog_cannot_write_partial_snapshot_or_mutate_geometry (test_database.DatabaseChecks.test_invalid_catalog_cannot_write_partial_snapshot_or_mutate_geometry) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_invalid_contract_and_rail_rewards_fail_closed (test_database.DatabaseChecks.test_invalid_contract_and_rail_rewards_fail_closed) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_metres_route_quality_and_spheroid_boundary (test_database.DatabaseChecks.test_metres_route_quality_and_spheroid_boundary) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_migration_is_idempotent (test_database.DatabaseChecks.test_migration_is_idempotent) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_owner_and_tenant_rls_for_actual_login_and_transaction_context_reset (test_database.DatabaseChecks.test_owner_and_tenant_rls_for_actual_login_and_transaction_context_reset) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_pings_and_decisions_cannot_be_mutated_and_replay_conflict_rejected (test_database.DatabaseChecks.test_pings_and_decisions_cannot_be_mutated_and_replay_conflict_rejected) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_real_app_login_has_no_bypass_and_admin_credentials_are_rejected (test_database.DatabaseChecks.test_real_app_login_has_no_bypass_and_admin_credentials_are_rejected) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_reversal_concurrency_is_exact_negative_and_immutable (test_database.DatabaseChecks.test_reversal_concurrency_is_exact_negative_and_immutable) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_service_catalog_direction_and_loop_occurrences_are_validated (test_database.DatabaseChecks.test_service_catalog_direction_and_loop_occurrences_are_validated) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_spherical_differential_2000_generated_pairs (test_database.DatabaseChecks.test_spherical_differential_2000_generated_pairs) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_wallet_http_balance_pagination_duplicate_retry_and_reversal_reconcile (test_database.DatabaseChecks.test_wallet_http_balance_pagination_duplicate_retry_and_reversal_reconcile) ... skipped 'Real PostGIS tests require TEST_DATABASE_URL; local skip is not acceptance'
+test_commuter_configuration_is_explicit_and_private (test_http_boundary.HttpBoundaryChecks.test_commuter_configuration_is_explicit_and_private) ... ok
+test_disabled_commuter_boundary_rejects_operator_token (test_http_boundary.HttpBoundaryChecks.test_disabled_commuter_boundary_rejects_operator_token) ... Executing <Task pending name='Task-26' coro=<HttpBoundaryChecks.test_disabled_commuter_boundary_rejects_operator_token() running at D:\anonym\war-log\transportlah\backend\tests\test_http_boundary.py:20> cb=[_run_until_complete_cb() at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:181] created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.109 seconds
+{"event": "http_request", "request_id": "4115988d-9822-4582-b8c9-c3d390de347e", "method": "GET", "status": 503, "duration_ms": 47.0}
+ok
+test_invalid_and_mismatched_lengths_are_rejected_without_echo (test_http_boundary.HttpBoundaryChecks.test_invalid_and_mismatched_lengths_are_rejected_without_echo) ... {"event": "http_request", "request_id": "943842b2-4b75-4a59-b7c3-4915e55844b2", "method": "POST", "status": 400, "duration_ms": 0.0}
+{"event": "http_request", "request_id": "8db81d11-96d1-4cf7-8e54-8be1c907d7a1", "method": "POST", "status": 413, "duration_ms": 16.0}
+{"event": "http_request", "request_id": "5f92f402-937d-46da-8f41-b8d09108dd87", "method": "POST", "status": 400, "duration_ms": 47.0}
+ok
+test_oversized_declared_and_chunked_bodies_are_bounded (test_http_boundary.HttpBoundaryChecks.test_oversized_declared_and_chunked_bodies_are_bounded) ... {"event": "http_request", "request_id": "1f972740-bb94-4a00-9181-899a8b11eb1b", "method": "POST", "status": 413, "duration_ms": 16.0}
+{"event": "http_request", "request_id": "e79141ba-17f0-4727-a576-0c3c4eceb61d", "method": "POST", "status": 413, "duration_ms": 78.0}
+ok
+test_validation_errors_and_logs_do_not_echo_credentials_or_location (test_http_boundary.HttpBoundaryChecks.test_validation_errors_and_logs_do_not_echo_credentials_or_location) ... ok
+test_es256_signature_and_wrong_curve_are_checked (test_identity.IdentityChecks.test_es256_signature_and_wrong_curve_are_checked) ... Executing <Task finished name='Task-48' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.250 seconds
+ok
+test_insecure_issuer_or_symmetric_algorithm_configuration_rejected (test_identity.IdentityChecks.test_insecure_issuer_or_symmetric_algorithm_configuration_rejected) ... Executing <Task finished name='Task-53' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.187 seconds
+ok
+test_key_fetch_failure_is_closed (test_identity.IdentityChecks.test_key_fetch_failure_is_closed) ... Executing <Task finished name='Task-57' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.468 seconds
+ok
+test_malformed_key_sets_fail_with_authentication_error (test_identity.IdentityChecks.test_malformed_key_sets_fail_with_authentication_error) ... Executing <Task finished name='Task-62' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.562 seconds
+ok
+test_missing_expiration_and_unsigned_tokens_fail (test_identity.IdentityChecks.test_missing_expiration_and_unsigned_tokens_fail) ... Executing <Task finished name='Task-67' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.297 seconds
+ok
+test_signature_validated_but_role_and_tenant_claims_ignored (test_identity.IdentityChecks.test_signature_validated_but_role_and_tenant_claims_ignored) ... Executing <Task finished name='Task-72' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.469 seconds
+ok
+test_token_key_urls_are_ignored_and_unknown_kids_refresh_is_bounded (test_identity.IdentityChecks.test_token_key_urls_are_ignored_and_unknown_kids_refresh_is_bounded) ... Executing <Task finished name='Task-77' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.406 seconds
+Executing <Task pending name='Task-78' coro=<IdentityChecks.test_token_key_urls_are_ignored_and_unknown_kids_refresh_is_bounded() running at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:58> wait_for=<_GatheringFuture pending cb=[Task.task_wakeup()] created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\tasks.py:712> cb=[_run_until_complete_cb() at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\base_events.py:181] created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.312 seconds
+Executing <Task finished name='Task-81' coro=<OIDCVerifier.verify() done, defined at D:\anonym\war-log\transportlah\backend\app\identity.py:74> exception=AuthenticationFailed('Key refresh unavailable') created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\tasks.py:695> took 0.156 seconds
+ok
+test_wrong_signature_issuer_audience_expiry_and_future_issuance_fail (test_identity.IdentityChecks.test_wrong_signature_issuer_audience_expiry_and_future_issuance_fail) ... Executing <Task finished name='Task-102' coro=<IdentityChecks.asyncSetUp() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_identity.py:13> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.438 seconds
+ok
+test_arrivals_require_service_authorization (test_ingestion.ApiChecks.test_arrivals_require_service_authorization) ... {"event": "http_request", "request_id": "06bd5479-8636-4ae4-9d96-fe7c89fd6bc4", "method": "GET", "status": 401, "duration_ms": 31.0}
+{"event": "http_request", "request_id": "b52049b8-4bb0-471e-b9d3-5ea8fd17f8c4", "method": "GET", "status": 200, "duration_ms": 31.0}
+ok
+test_lifespan_polls_only_configured_historical_target_and_cancels (test_ingestion.ApiChecks.test_lifespan_polls_only_configured_historical_target_and_cancels) ... ok
+test_multiple_stop_endpoint_reports_missing_capture_truthfully (test_ingestion.ApiChecks.test_multiple_stop_endpoint_reports_missing_capture_truthfully) ... {"event": "http_request", "request_id": "b5e21325-c556-4ac2-8e73-fe1bf16f5977", "method": "GET", "status": 200, "duration_ms": 94.0}
+ok
+test_readiness_reports_external_dependencies_instead_of_claiming_ready (test_ingestion.ApiChecks.test_readiness_reports_external_dependencies_instead_of_claiming_ready) ... {"event": "http_request", "request_id": "08b1c655-bfc1-4c45-865e-7d48b71dab86", "method": "GET", "status": 503, "duration_ms": 47.0}
+ok
+test_request_id_is_generated_and_bad_stop_is_rejected (test_ingestion.ApiChecks.test_request_id_is_generated_and_bad_stop_is_rejected) ... {"event": "http_request", "request_id": "0c597b2b-8c52-419d-a13f-690d123221f9", "method": "GET", "status": 200, "duration_ms": 31.0}
+{"event": "http_request", "request_id": "66f8b610-3afb-451c-bc5d-6efd54df93ca", "method": "GET", "status": 422, "duration_ms": 16.0}
+ok
+test_absent_capture_directory_is_not_ready (test_ingestion.CaptureChecks.test_absent_capture_directory_is_not_ready) ... ok
+test_concurrent_burst_is_coalesced_using_one_actual_capture_read (test_ingestion.CaptureChecks.test_concurrent_burst_is_coalesced_using_one_actual_capture_read) ... ok
+test_original_hash_is_checked_and_times_are_preserved (test_ingestion.CaptureChecks.test_original_hash_is_checked_and_times_are_preserved) ... ok
+test_schedule_only_zero_locations_never_become_a_trajectory (test_ingestion.CaptureChecks.test_schedule_only_zero_locations_never_become_a_trajectory) ... ok
+test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time (test_ingestion.CaptureChecks.test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time) ... ok
+test_unrecorded_services_share_stop_budget (test_ingestion.CaptureChecks.test_unrecorded_services_share_stop_budget) ... ok
+test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback (test_ingestion.CaptureChecks.test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback) ... ok
+test_invalid_configuration_fails_explicitly (test_ingestion.ConfigurationChecks.test_invalid_configuration_fails_explicitly) ... ok
+test_secret_values_are_not_in_settings_repr (test_ingestion.ConfigurationChecks.test_secret_values_are_not_in_settings_repr) ... ok
+test_absent_service_and_candidates_are_unavailable_without_invention (test_ingestion_edges.TelemetryEdges.test_absent_service_and_candidates_are_unavailable_without_invention) ... ok
+test_malformed_payloads_scope_and_invalid_timestamps_fail_conservatively (test_ingestion_edges.TelemetryEdges.test_malformed_payloads_scope_and_invalid_timestamps_fail_conservatively) ... ok
+test_monitoring_variants_empty_fields_and_uncertain_position (test_ingestion_edges.TelemetryEdges.test_monitoring_variants_empty_fields_and_uncertain_position) ... ok
+test_nonfinite_and_boolean_coordinates_remain_unavailable (test_ingestion_edges.TelemetryEdges.test_nonfinite_and_boolean_coordinates_remain_unavailable) ... ok
+test_roles_are_action_specific_and_unknown_roles_cannot_escalate (test_ingestion_edges.TelemetryEdges.test_roles_are_action_specific_and_unknown_roles_cannot_escalate) ... ok
+test_both_transports_use_the_same_parser_without_payload_drift (test_ingestion_edges.TransportEdges.test_both_transports_use_the_same_parser_without_payload_drift) ... Executing <Task finished name='Task-201' coro=<TransportEdges.test_both_transports_use_the_same_parser_without_payload_drift() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_ingestion_edges.py:74> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.234 seconds
+ok
+test_failure_does_not_refresh_cache_or_claim_a_success (test_ingestion_edges.TransportEdges.test_failure_does_not_refresh_cache_or_claim_a_success) ... ok
+test_http_rejection_timeout_malformed_body_and_size_limits_never_fallback (test_ingestion_edges.TransportEdges.test_http_rejection_timeout_malformed_body_and_size_limits_never_fallback) ... Executing <Task finished name='Task-211' coro=<TransportEdges.test_http_rejection_timeout_malformed_body_and_size_limits_never_fallback() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_ingestion_edges.py:90> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.281 seconds
+ok
+test_retry_after_is_bounded_and_invalid_values_never_become_nan (test_ingestion_edges.TransportEdges.test_retry_after_is_bounded_and_invalid_values_never_become_nan) ... Executing <Task finished name='Task-217' coro=<TransportEdges.test_retry_after_is_bounded_and_invalid_values_never_become_nan() done, defined at D:\anonym\war-log\transportlah\backend\tests\test_ingestion_edges.py:105> result=None created at C:\Users\Admin\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\asyncio\runners.py:100> took 0.297 seconds
+ok
+test_contests_enforce_mode_and_tier_and_disable_test_vectors_in_production (test_verification.VerificationPolicyChecks.test_contests_enforce_mode_and_tier_and_disable_test_vectors_in_production) ... ok
+test_contradicted_service_or_direction_is_rejected_even_with_high_score (test_verification.VerificationPolicyChecks.test_contradicted_service_or_direction_is_rejected_even_with_high_score) ... ok
+test_device_integrity_alone_is_not_an_onboard_proof (test_verification.VerificationPolicyChecks.test_device_integrity_alone_is_not_an_onboard_proof) ... ok
+test_full_generated_bus_evidence_is_tier_two_but_explicitly_test_only (test_verification.VerificationPolicyChecks.test_full_generated_bus_evidence_is_tier_two_but_explicitly_test_only) ... ok
+test_high_score_without_validated_corridor_cannot_be_verified (test_verification.VerificationPolicyChecks.test_high_score_without_validated_corridor_cannot_be_verified) ... ok
+test_invalid_and_incomplete_internal_evidence_is_not_accepted (test_verification.VerificationPolicyChecks.test_invalid_and_incomplete_internal_evidence_is_not_accepted) ... ok
+test_manual_claim_is_tier_zero_without_points (test_verification.VerificationPolicyChecks.test_manual_claim_is_tier_zero_without_points) ... ok
+test_missing_transit_context_never_renormalizes_other_weights (test_verification.VerificationPolicyChecks.test_missing_transit_context_never_renormalizes_other_weights) ... ok
+test_origin_is_mandatory_and_not_an_open_ended_string (test_verification.VerificationPolicyChecks.test_origin_is_mandatory_and_not_an_open_ended_string) ... ok
+test_rail_is_probable_until_a_validated_rail_adapter_exists (test_verification.VerificationPolicyChecks.test_rail_is_probable_until_a_validated_rail_adapter_exists) ... ok
+test_rounded_79_point_995_does_not_cross_class_boundary (test_verification.VerificationPolicyChecks.test_rounded_79_point_995_does_not_cross_class_boundary) ... ok
+test_single_ping_and_inactive_lifecycle_are_hard_rejections (test_verification.VerificationPolicyChecks.test_single_ping_and_inactive_lifecycle_are_hard_rejections) ... ok
+
+----------------------------------------------------------------------
+Ran 83 tests in 7.735s
+
+OK (skipped=24)

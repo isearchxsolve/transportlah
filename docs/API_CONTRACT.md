@@ -1,6 +1,8 @@
 # TransportLah API contract v1
 
-B05 design artifact, 2026-10-15. This document defines implementation work; only the health/readiness and operator-arrival endpoints listed below exist today. New commuter/admin endpoints remain closed until their auth, lifecycle, evidence and audit dependencies pass. Generated catalog tests are not live acceptance.
+B05 design artifact, updated2026-10-16. Operator endpoints exist. Optional authenticated reads now implement /me, /rides/{id}, /wallet, /wallet/entries and /admin/audit-events, gated by explicit provider and non-owner DB configuration. Mutation/admin product flows below remain design work. Generated tests are not live/provider/device acceptance.
+
+Implemented wallet/audit pagination uses `before` (positive bigint) and `limit`1–100, returning next_before. The cursor is a descending ledger/event ID; ownership/tenant RLS is always reapplied. Public opaque cursor encoding remains a presentation/API evolution, not an authorization mechanism. `/me` currently returns identity/membership/actions; display-name profile storage is pending. Ride reads currently return owner lifecycle fields; evaluator/result/history expansion remains pending.
 
 ## Common boundary
 

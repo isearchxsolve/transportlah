@@ -1,0 +1,127 @@
+test_capture_window_and_timezone_are_required (test_catalog.CatalogChecks.test_capture_window_and_timezone_are_required) ... ok
+test_direction_and_repeated_stop_occurrences_remain_distinct (test_catalog.CatalogChecks.test_direction_and_repeated_stop_occurrences_remain_distinct) ... ok
+test_duplicate_stop_and_service_records_fail_even_when_identical (test_catalog.CatalogChecks.test_duplicate_stop_and_service_records_fail_even_when_identical) ... ok
+test_missing_terminal_dataset_out_of_order_and_duplicate_pages_fail (test_catalog.CatalogChecks.test_missing_terminal_dataset_out_of_order_and_duplicate_pages_fail) ... ok
+test_nonfinite_zero_and_bad_range_coordinates_fail (test_catalog.CatalogChecks.test_nonfinite_zero_and_bad_range_coordinates_fail) ... ok
+test_tampered_raw_capture_and_missing_provenance_are_rejected (test_catalog.CatalogChecks.test_tampered_raw_capture_and_missing_provenance_are_rejected) ... ok
+test_unknown_stops_missing_services_sequence_gaps_and_backwards_distance_fail (test_catalog.CatalogChecks.test_unknown_stops_missing_services_sequence_gaps_and_backwards_distance_fail) ... ok
+test_actual_pagination_parameters_do_not_follow_untrusted_next_links (test_catalog.CatalogTransportChecks.test_actual_pagination_parameters_do_not_follow_untrusted_next_links) ... ok
+test_no_key_is_an_explicit_error (test_catalog.CatalogTransportChecks.test_no_key_is_an_explicit_error) ... ok
+test_repeated_full_page_and_page_limit_fail (test_catalog.CatalogTransportChecks.test_repeated_full_page_and_page_limit_fail) ... ok
+test_upstream_denial_malformed_and_oversize_responses_fail_without_fallback (test_catalog.CatalogTransportChecks.test_upstream_denial_malformed_and_oversize_responses_fail_without_fallback) ... ok
+test_active_ride_and_test_evidence_in_production_rejected_atomically (test_database.DatabaseChecks.test_active_ride_and_test_evidence_in_production_rejected_atomically) ... ok
+test_audit_context_and_reviewer_rls_do_not_leak_other_tenants (test_database.DatabaseChecks.test_audit_context_and_reviewer_rls_do_not_leak_other_tenants) ... ok
+test_authenticated_http_owner_tenant_and_missing_identity_boundaries (test_database.DatabaseChecks.test_authenticated_http_owner_tenant_and_missing_identity_boundaries) ... {"event": "http_request", "request_id": "0d419495-d27e-4051-a463-4eab774fd896", "method": "GET", "status": 401, "duration_ms": 1.156}
+{"event": "http_request", "request_id": "8b90222e-2b24-4c68-8a38-715d07fa3dfa", "method": "GET", "status": 401, "duration_ms": 1.059}
+{"event": "http_request", "request_id": "dcaf1e7e-fba8-44db-b3a0-d8a8ca08e2c3", "method": "GET", "status": 404, "duration_ms": 11.452}
+{"event": "http_request", "request_id": "a4a11190-52f4-4020-81f1-16d095479748", "method": "GET", "status": 200, "duration_ms": 15.683}
+{"event": "http_request", "request_id": "ed083fa2-4648-4abd-9fa6-1c216c8ed647", "method": "GET", "status": 200, "duration_ms": 13.82}
+{"event": "http_request", "request_id": "1cf2d97c-b617-4890-9243-5fa5c9b65353", "method": "GET", "status": 404, "duration_ms": 14.128}
+{"event": "http_request", "request_id": "63a7b82d-0a09-4a67-b6ad-f9f3aa9e579c", "method": "GET", "status": 404, "duration_ms": 12.891}
+{"event": "http_request", "request_id": "13936e63-3e20-44d6-a869-9d47dea79bf1", "method": "GET", "status": 404, "duration_ms": 14.17}
+{"event": "http_request", "request_id": "488d5f52-3310-42ec-98ec-53369ece1f37", "method": "GET", "status": 404, "duration_ms": 10.215}
+ok
+test_boarding_accuracy_envelope_and_test_provenance_with_real_postgis (test_database.DatabaseChecks.test_boarding_accuracy_envelope_and_test_provenance_with_real_postgis) ... ok
+test_catalog_sql_failure_after_stop_inserts_rolls_back_new_version (test_database.DatabaseChecks.test_catalog_sql_failure_after_stop_inserts_rolls_back_new_version) ... ok
+test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits (test_database.DatabaseChecks.test_catalog_version_import_is_atomic_idempotent_and_preserves_loop_visits) ... ok
+test_commuter_cannot_write_award_or_invoke_worker_function (test_database.DatabaseChecks.test_commuter_cannot_write_award_or_invoke_worker_function) ... ok
+test_concurrent_award_retries_credit_once (test_database.DatabaseChecks.test_concurrent_award_retries_credit_once) ... ok
+test_concurrent_different_rides_respect_gross_daily_cap (test_database.DatabaseChecks.test_concurrent_different_rides_respect_gross_daily_cap) ... ok
+test_conflicting_retry_cannot_rewrite_decision (test_database.DatabaseChecks.test_conflicting_retry_cannot_rewrite_decision) ... ok
+test_eta_and_capture_time_are_never_position_observation_time (test_database.DatabaseChecks.test_eta_and_capture_time_are_never_position_observation_time) ... ok
+test_gist_plan_uses_matching_native_geography_index (test_database.DatabaseChecks.test_gist_plan_uses_matching_native_geography_index) ... ok
+test_http_roles_come_from_database_and_denials_have_immutable_human_audit (test_database.DatabaseChecks.test_http_roles_come_from_database_and_denials_have_immutable_human_audit) ... {"event": "http_request", "request_id": "b4c3df58-9430-44a8-970a-9d8a13655d52", "method": "GET", "status": 403, "duration_ms": 14.296}
+{"event": "http_request", "request_id": "b675de02-9c9e-4f09-8fa3-72760d6c639a", "method": "GET", "status": 200, "duration_ms": 12.988}
+{"event": "http_request", "request_id": "b4cc887b-9749-4ae3-b33e-a7a2dd3444ab", "method": "GET", "status": 403, "duration_ms": 12.754}
+{"event": "http_request", "request_id": "c92ea81e-214d-4fae-b26c-cb176721be4b", "method": "GET", "status": 200, "duration_ms": 14.526}
+{"event": "http_request", "request_id": "01925396-ea91-477c-b5ba-e545613d2469", "method": "GET", "status": 200, "duration_ms": 13.402}
+ok
+test_invalid_catalog_cannot_write_partial_snapshot_or_mutate_geometry (test_database.DatabaseChecks.test_invalid_catalog_cannot_write_partial_snapshot_or_mutate_geometry) ... ok
+test_invalid_contract_and_rail_rewards_fail_closed (test_database.DatabaseChecks.test_invalid_contract_and_rail_rewards_fail_closed) ... ok
+test_metres_route_quality_and_spheroid_boundary (test_database.DatabaseChecks.test_metres_route_quality_and_spheroid_boundary) ... ok
+test_migration_is_idempotent (test_database.DatabaseChecks.test_migration_is_idempotent) ... ok
+test_owner_and_tenant_rls_for_actual_login_and_transaction_context_reset (test_database.DatabaseChecks.test_owner_and_tenant_rls_for_actual_login_and_transaction_context_reset) ... ok
+test_pings_and_decisions_cannot_be_mutated_and_replay_conflict_rejected (test_database.DatabaseChecks.test_pings_and_decisions_cannot_be_mutated_and_replay_conflict_rejected) ... ok
+test_real_app_login_has_no_bypass_and_admin_credentials_are_rejected (test_database.DatabaseChecks.test_real_app_login_has_no_bypass_and_admin_credentials_are_rejected) ... ok
+test_reversal_concurrency_is_exact_negative_and_immutable (test_database.DatabaseChecks.test_reversal_concurrency_is_exact_negative_and_immutable) ... ok
+test_service_catalog_direction_and_loop_occurrences_are_validated (test_database.DatabaseChecks.test_service_catalog_direction_and_loop_occurrences_are_validated) ... ok
+test_spherical_differential_2000_generated_pairs (test_database.DatabaseChecks.test_spherical_differential_2000_generated_pairs) ... ok
+test_wallet_http_balance_pagination_duplicate_retry_and_reversal_reconcile (test_database.DatabaseChecks.test_wallet_http_balance_pagination_duplicate_retry_and_reversal_reconcile) ... {"event": "http_request", "request_id": "39e94c47-36e5-4d2a-be71-95a4990145f7", "method": "GET", "status": 200, "duration_ms": 15.113}
+{"event": "http_request", "request_id": "a48b4714-762b-4d94-b0be-4401abaa7e7b", "method": "GET", "status": 200, "duration_ms": 12.942}
+{"event": "http_request", "request_id": "81237122-5a95-486b-92eb-ab1a73da9940", "method": "GET", "status": 200, "duration_ms": 14.165}
+{"event": "http_request", "request_id": "a50f0a04-4e75-4c34-9108-a8681303d611", "method": "GET", "status": 422, "duration_ms": 0.842}
+{"event": "http_request", "request_id": "64afeb53-cd8c-446f-8688-b2d2142a9272", "method": "POST", "status": 405, "duration_ms": 0.415}
+{"event": "http_request", "request_id": "494c358f-1259-4552-8749-494270b78643", "method": "GET", "status": 200, "duration_ms": 13.318}
+ok
+test_commuter_configuration_is_explicit_and_private (test_http_boundary.HttpBoundaryChecks.test_commuter_configuration_is_explicit_and_private) ... ok
+test_disabled_commuter_boundary_rejects_operator_token (test_http_boundary.HttpBoundaryChecks.test_disabled_commuter_boundary_rejects_operator_token) ... {"event": "http_request", "request_id": "5af0b377-0b48-4610-ae9f-aac65dd2f050", "method": "GET", "status": 503, "duration_ms": 3.75}
+ok
+test_invalid_and_mismatched_lengths_are_rejected_without_echo (test_http_boundary.HttpBoundaryChecks.test_invalid_and_mismatched_lengths_are_rejected_without_echo) ... {"event": "http_request", "request_id": "82c5b40b-8196-4c15-ba94-b882228fe22c", "method": "POST", "status": 400, "duration_ms": 0.764}
+{"event": "http_request", "request_id": "ee1fc5e8-a16b-43eb-973c-846502e930f2", "method": "POST", "status": 413, "duration_ms": 0.591}
+{"event": "http_request", "request_id": "0d763c7b-b495-4731-97db-248fd734cbbb", "method": "POST", "status": 400, "duration_ms": 2.075}
+ok
+test_oversized_declared_and_chunked_bodies_are_bounded (test_http_boundary.HttpBoundaryChecks.test_oversized_declared_and_chunked_bodies_are_bounded) ... {"event": "http_request", "request_id": "3f69907a-fc15-42ed-b9ee-20a26eabb140", "method": "POST", "status": 413, "duration_ms": 0.766}
+{"event": "http_request", "request_id": "dfb9c813-5a19-401a-a250-d38739dd5b60", "method": "POST", "status": 413, "duration_ms": 4.559}
+ok
+test_validation_errors_and_logs_do_not_echo_credentials_or_location (test_http_boundary.HttpBoundaryChecks.test_validation_errors_and_logs_do_not_echo_credentials_or_location) ... ok
+test_es256_signature_and_wrong_curve_are_checked (test_identity.IdentityChecks.test_es256_signature_and_wrong_curve_are_checked) ... Executing <Task finished name='Task-60' coro=<IdentityChecks.asyncSetUp() done, defined at /home/runner/work/transportlah/transportlah/backend/tests/test_identity.py:13> result=None created at /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/runners.py:100> took 0.134 seconds
+ok
+test_insecure_issuer_or_symmetric_algorithm_configuration_rejected (test_identity.IdentityChecks.test_insecure_issuer_or_symmetric_algorithm_configuration_rejected) ... ok
+test_key_fetch_failure_is_closed (test_identity.IdentityChecks.test_key_fetch_failure_is_closed) ... ok
+test_malformed_key_sets_fail_with_authentication_error (test_identity.IdentityChecks.test_malformed_key_sets_fail_with_authentication_error) ... ok
+test_missing_expiration_and_unsigned_tokens_fail (test_identity.IdentityChecks.test_missing_expiration_and_unsigned_tokens_fail) ... Executing <Task finished name='Task-79' coro=<IdentityChecks.asyncSetUp() done, defined at /home/runner/work/transportlah/transportlah/backend/tests/test_identity.py:13> result=None created at /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/runners.py:100> took 0.115 seconds
+ok
+test_signature_validated_but_role_and_tenant_claims_ignored (test_identity.IdentityChecks.test_signature_validated_but_role_and_tenant_claims_ignored) ... ok
+test_token_key_urls_are_ignored_and_unknown_kids_refresh_is_bounded (test_identity.IdentityChecks.test_token_key_urls_are_ignored_and_unknown_kids_refresh_is_bounded) ... ok
+test_wrong_signature_issuer_audience_expiry_and_future_issuance_fail (test_identity.IdentityChecks.test_wrong_signature_issuer_audience_expiry_and_future_issuance_fail) ... ok
+test_arrivals_require_service_authorization (test_ingestion.ApiChecks.test_arrivals_require_service_authorization) ... {"event": "http_request", "request_id": "aa435c50-6028-498a-8200-d4a8e65e3374", "method": "GET", "status": 401, "duration_ms": 2.14}
+{"event": "http_request", "request_id": "40149656-51fa-4e5d-a363-3408529357bd", "method": "GET", "status": 200, "duration_ms": 1.995}
+ok
+test_lifespan_polls_only_configured_historical_target_and_cancels (test_ingestion.ApiChecks.test_lifespan_polls_only_configured_historical_target_and_cancels) ... ok
+test_multiple_stop_endpoint_reports_missing_capture_truthfully (test_ingestion.ApiChecks.test_multiple_stop_endpoint_reports_missing_capture_truthfully) ... {"event": "http_request", "request_id": "7dda533a-0dd8-4895-99c0-c7cf65084988", "method": "GET", "status": 200, "duration_ms": 3.316}
+ok
+test_readiness_reports_external_dependencies_instead_of_claiming_ready (test_ingestion.ApiChecks.test_readiness_reports_external_dependencies_instead_of_claiming_ready) ... {"event": "http_request", "request_id": "413d04d0-5fd9-4c89-8c56-b4014deac8a0", "method": "GET", "status": 503, "duration_ms": 3.005}
+ok
+test_request_id_is_generated_and_bad_stop_is_rejected (test_ingestion.ApiChecks.test_request_id_is_generated_and_bad_stop_is_rejected) ... {"event": "http_request", "request_id": "dd0a8d5b-d7e9-4de1-89a0-b54a450cc691", "method": "GET", "status": 200, "duration_ms": 1.81}
+{"event": "http_request", "request_id": "31886b01-c2dd-4b01-a18f-22c3c0417b51", "method": "GET", "status": 422, "duration_ms": 1.774}
+ok
+test_absent_capture_directory_is_not_ready (test_ingestion.CaptureChecks.test_absent_capture_directory_is_not_ready) ... ok
+test_concurrent_burst_is_coalesced_using_one_actual_capture_read (test_ingestion.CaptureChecks.test_concurrent_burst_is_coalesced_using_one_actual_capture_read) ... ok
+test_original_hash_is_checked_and_times_are_preserved (test_ingestion.CaptureChecks.test_original_hash_is_checked_and_times_are_preserved) ... ok
+test_schedule_only_zero_locations_never_become_a_trajectory (test_ingestion.CaptureChecks.test_schedule_only_zero_locations_never_become_a_trajectory) ... ok
+test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time (test_ingestion.CaptureChecks.test_ttl_expiry_respects_stop_rate_limit_with_real_elapsed_time) ... ok
+test_unrecorded_services_share_stop_budget (test_ingestion.CaptureChecks.test_unrecorded_services_share_stop_budget) ... ok
+test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback (test_ingestion.CaptureChecks.test_unrecorded_stop_and_unrecorded_scope_fail_without_fallback) ... ok
+test_invalid_configuration_fails_explicitly (test_ingestion.ConfigurationChecks.test_invalid_configuration_fails_explicitly) ... ok
+test_secret_values_are_not_in_settings_repr (test_ingestion.ConfigurationChecks.test_secret_values_are_not_in_settings_repr) ... ok
+test_absent_service_and_candidates_are_unavailable_without_invention (test_ingestion_edges.TelemetryEdges.test_absent_service_and_candidates_are_unavailable_without_invention) ... ok
+test_malformed_payloads_scope_and_invalid_timestamps_fail_conservatively (test_ingestion_edges.TelemetryEdges.test_malformed_payloads_scope_and_invalid_timestamps_fail_conservatively) ... ok
+test_monitoring_variants_empty_fields_and_uncertain_position (test_ingestion_edges.TelemetryEdges.test_monitoring_variants_empty_fields_and_uncertain_position) ... ok
+test_nonfinite_and_boolean_coordinates_remain_unavailable (test_ingestion_edges.TelemetryEdges.test_nonfinite_and_boolean_coordinates_remain_unavailable) ... ok
+test_roles_are_action_specific_and_unknown_roles_cannot_escalate (test_ingestion_edges.TelemetryEdges.test_roles_are_action_specific_and_unknown_roles_cannot_escalate) ... ok
+test_both_transports_use_the_same_parser_without_payload_drift (test_ingestion_edges.TransportEdges.test_both_transports_use_the_same_parser_without_payload_drift) ... ok
+test_failure_does_not_refresh_cache_or_claim_a_success (test_ingestion_edges.TransportEdges.test_failure_does_not_refresh_cache_or_claim_a_success) ... ok
+test_http_rejection_timeout_malformed_body_and_size_limits_never_fallback (test_ingestion_edges.TransportEdges.test_http_rejection_timeout_malformed_body_and_size_limits_never_fallback) ... Executing <Task finished name='Task-224' coro=<TransportEdges.test_http_rejection_timeout_malformed_body_and_size_limits_never_fallback() done, defined at /home/runner/work/transportlah/transportlah/backend/tests/test_ingestion_edges.py:90> result=None created at /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/runners.py:100> took 0.108 seconds
+ok
+test_retry_after_is_bounded_and_invalid_values_never_become_nan (test_ingestion_edges.TransportEdges.test_retry_after_is_bounded_and_invalid_values_never_become_nan) ... Executing <Task finished name='Task-232' coro=<TransportEdges.test_retry_after_is_bounded_and_invalid_values_never_become_nan() done, defined at /home/runner/work/transportlah/transportlah/backend/tests/test_ingestion_edges.py:105> result=None created at /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/runners.py:100> took 0.106 seconds
+ok
+test_contests_enforce_mode_and_tier_and_disable_test_vectors_in_production (test_verification.VerificationPolicyChecks.test_contests_enforce_mode_and_tier_and_disable_test_vectors_in_production) ... ok
+test_contradicted_service_or_direction_is_rejected_even_with_high_score (test_verification.VerificationPolicyChecks.test_contradicted_service_or_direction_is_rejected_even_with_high_score) ... ok
+test_device_integrity_alone_is_not_an_onboard_proof (test_verification.VerificationPolicyChecks.test_device_integrity_alone_is_not_an_onboard_proof) ... ok
+test_full_generated_bus_evidence_is_tier_two_but_explicitly_test_only (test_verification.VerificationPolicyChecks.test_full_generated_bus_evidence_is_tier_two_but_explicitly_test_only) ... ok
+test_high_score_without_validated_corridor_cannot_be_verified (test_verification.VerificationPolicyChecks.test_high_score_without_validated_corridor_cannot_be_verified) ... ok
+test_invalid_and_incomplete_internal_evidence_is_not_accepted (test_verification.VerificationPolicyChecks.test_invalid_and_incomplete_internal_evidence_is_not_accepted) ... ok
+test_manual_claim_is_tier_zero_without_points (test_verification.VerificationPolicyChecks.test_manual_claim_is_tier_zero_without_points) ... ok
+test_missing_transit_context_never_renormalizes_other_weights (test_verification.VerificationPolicyChecks.test_missing_transit_context_never_renormalizes_other_weights) ... ok
+test_origin_is_mandatory_and_not_an_open_ended_string (test_verification.VerificationPolicyChecks.test_origin_is_mandatory_and_not_an_open_ended_string) ... ok
+test_rail_is_probable_until_a_validated_rail_adapter_exists (test_verification.VerificationPolicyChecks.test_rail_is_probable_until_a_validated_rail_adapter_exists) ... ok
+test_rounded_79_point_995_does_not_cross_class_boundary (test_verification.VerificationPolicyChecks.test_rounded_79_point_995_does_not_cross_class_boundary) ... ok
+test_single_ping_and_inactive_lifecycle_are_hard_rejections (test_verification.VerificationPolicyChecks.test_single_ping_and_inactive_lifecycle_are_hard_rejections) ... ok
+
+----------------------------------------------------------------------
+Ran 83 tests in 4.288s
+
+OK
+{"database_checks_origin": "TEST_VECTOR", "postgres": "PostgreSQL 16.9 (Debian 16.9-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit", "postgis": "POSTGIS=\"3.5.2 dea6d0a\" [EXTENSION] PGSQL=\"160\" GEOS=\"3.9.0-CAPI-1.16.2\" PROJ=\"7.2.1 NETWORK_ENABLED=OFF URL_ENDPOINT=https://cdn.proj.org USER_WRITABLE_DIRECTORY=/var/lib/postgresql/.local/share/proj DATABASE_PATH=/usr/share/proj/proj.db\" (compiled against PROJ 7.2.1) LIBXML=\"2.9.10\" LIBJSON=\"0.15\" LIBPROTOBUF=\"1.3.3\" WAGYU=\"0.5.0 (Internal)\" TOPOLOGY"}
+{"spatial_test_origin": "TEST_VECTOR", "default_planner_gist": true, "plan": [{"Plan": {"Node Type": "Index Scan", "Parallel Aware": false, "Async Capable": false, "Scan Direction": "Forward", "Index Name": "stop_location_gist", "Relation Name": "stops", "Alias": "stops", "Startup Cost": 0.28, "Total Cost": 20.79, "Plan Rows": 1, "Plan Width": 16, "Actual Startup Time": 6.12, "Actual Total Time": 6.129, "Actual Rows": 1, "Actual Loops": 1, "Index Cond": "(location && _st_expand('0101000020E61000003333333333F35940CDCCCCCCCCCCF43F'::geography, '100'::double precision))", "Rows Removed by Index Recheck": 0, "Filter": "st_dwithin(location, '0101000020E61000003333333333F35940CDCCCCCCCCCCF43F'::geography, '100'::double precision, true)", "Rows Removed by Filter": 0}, "Planning Time": 0.884, "Triggers": [], "Execution Time": 6.178}]}
+{"spatial_test_origin": "TEST_VECTOR", "pairs": 2000, "max_sphere_error_metres": 7.159542292356491e-09}
