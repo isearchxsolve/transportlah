@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-10-16T16:14:18.297217+00:00",
+  "created_at_utc": "2026-10-16T16:15:55.149896+00:00",
   "tested_commit": "514dc15f21ba1d18dc02ade669d47241a8d126a1",
   "ci_run": "https://github.com/isearchxsolve/transportlah/actions/runs/38929431922",
   "completed": 30,
@@ -13,7 +13,7 @@
     "docs/MEDIUM_CATALOG_RECEIPT.md": "531ac1d7b7f068e5e2b195f86ab0c14f6405faba52d69644ae62b344ade10a35",
     "docs/MEDIUM_TEN_RECEIPT.md": "2c690895381a7188ceca98e237ebf46e4acd8070369d5458558fcb05f0630c63",
     "docs/PLAN.md": "ec0f54aa4b265b0d178e8be8b1a901c7429527c6b7a376afe42fbb55449d200e",
-    "docs/SEED_MANIFEST.json": "692477d2c339d7afbd9dedbf12e16f7db3af55f1ce3b3d79a6064759583346f7",
+    "docs/SEED_MANIFEST.json": "cb9a68e36a1daf8a2161c65d59b0c57523ed07dc43269a3c1db9fdf51e34f47c",
     "docs/SPATIAL_CONTRACT.md": "3891a9e29abe1a4445231ea40e5cc7e165e8378c9495c6c8437f30ac1c2e8c67",
     "docs/VERIFICATION_CONTRACT.md": "6d07bd9e00ac33dd1ab02eab93a2440af6cac6dcbcf8cc25d279d29a175d7324",
     "receipts/catalog_cloud/checks.json": "9649ac549cf7214c7d07054c3ff85b549a32d787450997f7a9599b28ff87a6d1",
@@ -48,5 +48,7 @@
     "receipts/medium10_local/seed_integrity.txt": "397fcc455eb9cc367c505933adef89c5e1445e613e9dfe019fb212f7630bb08c",
     "receipts/medium10_local/syntax.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "receipts/medium10_local/untouched_master.txt": "6d7b3d440d15ed4bb22c678286797f9e558ad0d83b73ad444f20c24f7e201b07"
-  }
+  },
+  "bundle_content_commit": "e90c307a6f523f9c2332cde40107cc4c0824d149",
+  "bundle_content_basis": "Exact committed Git file bytes; original workspace seed files are unchanged"
 }
